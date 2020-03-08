@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 //-----Routes----//
 app.get('/', (req, res) => {
-  res.send('<h1>Hello world</h1>')
+  res.send('Hello world')
 })
 
 
