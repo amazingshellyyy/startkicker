@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const db = require('./models');
 const cors = require('cors');
 const app = express();
-
+const sesClient = require('./ses-client')
 //env setup
 require('dotenv').config();
 const PORT = process.env.PORT;
@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 
 //-----Routes----//
 app.get('/', (req, res) => {
+  sesClient.sendEmail('amazingshellyyy@gmail.com', 'Hey!Welcome to startkisker', 'this is a test email');
   res.send('Hello world')
 })
 
