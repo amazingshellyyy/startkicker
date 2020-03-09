@@ -4,13 +4,13 @@ import Landing from '../components/Landing/Landing'
 import Signup from '../components/Signup/Signup';
 import Login from '../components/Login/Login';
 
-export default ({ currentUser, setCurrentUser }) => (
+export default ({ isLogin, setCurrentUser }) => (
   <Switch>
     <Route exact path='/' component={Landing} />
-    <Route path='/signup' component={Signup} />
+    <Route path='/signup' render={() => (<Signup isLogin={isLogin} setCurrentUser={setCurrentUser}/>)} />
     <Route
-      path='/login' component={Login}
+      path='/login' render={() => (<Login isLogin={isLogin} setCurrentUser={setCurrentUser}/>)}
     />
-  
   </Switch>
 );
+
