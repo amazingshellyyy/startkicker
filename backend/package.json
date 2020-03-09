@@ -17,7 +17,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server",
-    "start": "node server"
+    "start": "node server",
+    "deploy": "git subtree push --prefix backend heroku master"
   },
   "author": "amazingshellyyy",
   "license": "ISC"
