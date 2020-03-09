@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
+import Naviga from './components/Navbar/Navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Routes from './config/routes';
+import {Caontainer, Row, Col } from 'react-bootstrap';
 
 
 class App extends Component {
@@ -21,13 +24,12 @@ class App extends Component {
 render(){
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>Hello</h1>
+    <>
+      <Naviga />
+      <Routes />
         <button onClick={this.handletest}>get req</button>
-      </header>
-    </div>
+        
+    </>
   );
 }
 }
