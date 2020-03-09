@@ -17,7 +17,7 @@ const coresOptions = {
   optionsSuccessStatus: 200
 }
 
-
+app.use(morgan('dev'));
 app.use(cors(coresOptions))
 app.use(bodyParser.json());
 
