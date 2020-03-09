@@ -13,6 +13,7 @@ const routes = require('./routes');
 //-----Middleware---//
 const coresOptions = {
   origin: ['http://localhost:3000', 'http://amazingshellyyy.com','https://amazingshellyyy.com', 'http://amazingshelly.github.com'],
+  credentials: true,
   optionsSuccessStatus: 200
 }
 
