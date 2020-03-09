@@ -8,7 +8,7 @@ const app = express();
 //env setup
 require('dotenv').config();
 const PORT = process.env.PORT;
-// const routes = require('./routes');
+const routes = require('./routes');
 
 //-----Middleware---//
 const coresOptions = {
@@ -24,6 +24,9 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
   res.send('Hello world')
 })
+
+
+app.use('/api/v1/auth', routes.auth);
 
 
 

@@ -11,7 +11,7 @@ class App extends Component {
     event.preventDefault();
     axios.get(`${process.env.REACT_APP_URL}/`)
     .then(res => {
-      console.log(res);
+      console.log(res.data);
     })
     .catch(err => {
       console.log(err.response)
