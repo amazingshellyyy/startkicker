@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const UserSchema = mongoose.Schema({
   username: {
@@ -18,6 +19,18 @@ const UserSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  ownPj: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Project'
+  }],
+  supportPj:[{
+    type: Schema.Types.ObjectId,
+    ref: 'Project'
+  }],
+  selectPlan: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Plan'
+  }]
 });
 
 const User = mongoose.model('User', UserSchema);
