@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { useHistory } from "react-router-dom";
+import { withRouter } from "react-router";
 
 class Signup extends React.Component {
   state = {
@@ -22,11 +24,20 @@ class Signup extends React.Component {
     event.preventDefault();
     console.log('hiiii')
     console.log('bodytosend',this.state);
+    // axios.post(`${process.env.REACT_APP_API_URL}/pay/createCustomer`,{email: this.state.email, username: this.state.username})
+    //   .then(res => {
+    //     console.log(res.data)
+    //   })
+    //   .catch(err => {
+    //     console.log(err.response)
+    //   })
+
     axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, this.state)
       .then(res => {
         console.log(res.data.jwt)
         let jwt = res.data.jwt
         this.props.setCurrentUser(jwt);
+        this.props.history.push('/')
       })
       .catch(err => {
         console.log(err.response)
@@ -72,4 +83,4 @@ class Signup extends React.Component {
 }
 
 
-export default Signup;
+export default withRouter(Signup);

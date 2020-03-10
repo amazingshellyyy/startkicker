@@ -4,7 +4,7 @@ import axios from 'axios';
 import Naviga from './components/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './config/routes';
-import {Caontainer, Row, Col } from 'react-bootstrap';
+import { withRouter } from "react-router";
 
 
 class App extends Component {
@@ -42,12 +42,15 @@ class App extends Component {
       console.log(err.response)
     })
   }
+
  
 render(){
 
   return (
     <>
       <Naviga isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout.bind(this)}/>
+     
+      
       <Routes isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout}/>
         <button onClick={this.handletest}>get req</button>
         
@@ -56,4 +59,4 @@ render(){
 }
 }
 
-export default App;
+export default withRouter(App);
