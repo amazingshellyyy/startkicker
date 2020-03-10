@@ -16,6 +16,7 @@ class Navig extends React.Component{
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
+          <NavLink className="nav-link" to='/payment'>Payment</NavLink>
             <Nav.Link href="#home">Explore</Nav.Link>
             <Nav.Link href="#link">Start a project</Nav.Link>
           </Nav>

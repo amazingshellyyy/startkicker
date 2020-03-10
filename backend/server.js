@@ -9,6 +9,8 @@ const sesClient = require('./ses-client')
 require('dotenv').config();
 const PORT = process.env.PORT;
 const routes = require('./routes');
+const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
+
 
 //-----Middleware---//
 const coresOptions = {
@@ -29,7 +31,8 @@ app.get('/', (req, res) => {
 
 
 app.use('/api/v1/auth', routes.auth);
-
+app.use('/api/v1/pay', routes.pay);
+app.use('/api/v1/project', routes.project);
 
 
 
