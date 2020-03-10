@@ -22,7 +22,14 @@ const ProjectSchema = mongoose.Schema({
   category: {
     type: Schema.Types.ObjectId,
     ref: 'Category'
+  },
+  goal: {
+    type: Number,
+  },
+  endDate: {
+    type: Date,
   }
+
 });
 
 const Project = mongoose.model('Project', ProjectSchema);

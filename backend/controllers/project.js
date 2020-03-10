@@ -1,0 +1,66 @@
+const db = require('../models');
+
+const create = async(req, res) => {
+  const project = req.body;
+  console.log(project);
+
+  if (!project.title || !project.content || !project.endDate) {
+    return res.status(400).json({message: 'All filed is required'})
+  }
+  if (project.goal < 0 || project.goal == 0){
+    return res.status(400).json({message:'the goal cannot be equal to or smaller than 0'})
+  }
+
+  try {
+    const newProject = await db.Project.create(project);
+    res.status(200).json(newProject)
+  } catch (err) {
+    return res.status(500).json({
+      message: 'Something went wrong when creating a new project', err: err
+    })
+  }
+  
+}
+const update = async(req, res) => {
+  try {
+    let updatedProject = await db.Project.findByIdAndUpdate(req.params.id, req.body, {new: true}).populate('plan').populate('author').populate('category')
+    console.log(updatedProject);
+    res.status(200).json(updatedProject)
+  } catch (err) {
+    return res.status(500).json({
+      message: 'Something went wrong when updating project', err:err
+    })
+  }
+}
+const show = async(req, res) => {
+  try {
+    let showProject = await db.Project.findById(req.params.id);
+    console.log(showProject)
+    res.status(200).json(showProject)
+  } catch (err){
+    return res.status(500).json({
+      message: 'Something wrong when getting the project', err:err
+    })
+  }
+}
+const destroy = async(req, res) => {
+  try {
+    let deletedProject = await db.Project.findByIdAndDelete(req.params.id)
+    console.log(deletedProject)
+    res.status(200).json({message:'successfully deleted',deletedProject})
+  } catch(err) {
+    return res.status(500).json({
+      message: 'Something wrong when try to delete the project'
+    })
+  }
+}
+
+module.exports = {
+  create,
+  update,
+  show,
+  destroy
+}
+
+
+

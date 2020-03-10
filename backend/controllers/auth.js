@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const sesClient = require('../ses-client')
+const stripe = require('stripe');
 
 const signup = (req, res) => {
   const userData = req.body;
@@ -24,6 +24,7 @@ const signup = (req, res) => {
       if (err) return res.status(400).json({ message: 'Something went wrong, try again' });
       bcrypt.hash(userData.password, salt, (err, hash) => {
         if (err) return res.status(400).json({ message: 'Something went wrong, try again' });
+    
         const { username, email, password } = req.body;
         const newUser = {
           username: username,
@@ -37,7 +38,7 @@ const signup = (req, res) => {
               status: 503,
               errors: [{ message: 'access forbidden' }],
             });
-            sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email');
+            // sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email');
             
             res.status(200).json({ jwt });
             // res.status(201).json({message: 'Logged In'});
