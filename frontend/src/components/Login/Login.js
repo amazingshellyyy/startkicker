@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-
+import { withRouter } from "react-router";
 
 class Login extends React.Component {
   state = {
@@ -17,8 +17,18 @@ class Login extends React.Component {
     console.log(this.state.password)
   }
 
-  handleSubmit = () => {
-    axios.post()
+  handleSubmit = event => {
+    event.preventDefault();
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, this.state)
+      .then(res => {
+        console.log(res.data.jwt)
+        let jwt = res.data.jwt;
+        this.props.setCurrentUser(jwt, res.data.userId);
+        this.props.history.goBack();
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
   }
 
 
@@ -32,7 +42,7 @@ class Login extends React.Component {
             <Col></Col>
             <Col className="text-center">
               <h3 className="p-2">Login</h3>
-              <Form className="text-left">
+              <Form className="text-left" onSubmit={this.handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control type="email" name="email" placeholder="Enter email" onChange={this.handleChange}/>
                   <Form.Text className="text-muted">
@@ -57,4 +67,4 @@ class Login extends React.Component {
 }
 
 
-export default Login;
+export default withRouter(Login);

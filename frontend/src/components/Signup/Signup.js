@@ -1,7 +1,6 @@
 import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
-import { useHistory } from "react-router-dom";
 import { withRouter } from "react-router";
 
 class Signup extends React.Component {
@@ -36,8 +35,8 @@ class Signup extends React.Component {
       .then(res => {
         console.log(res.data.jwt)
         let jwt = res.data.jwt
-        this.props.setCurrentUser(jwt);
-        this.props.history.push('/')
+        this.props.setCurrentUser(jwt, res.data.userId);
+        this.props.history.goBack();
       })
       .catch(err => {
         console.log(err.response)

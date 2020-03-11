@@ -40,7 +40,7 @@ const signup = (req, res) => {
             });
             // sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email');
             
-            res.status(200).json({ jwt });
+            res.status(200).json({ jwt , userId: createdUser._id});
             // res.status(201).json({message: 'Logged In'});
           });
 
@@ -86,7 +86,7 @@ const login = (req, res) => {
             status: 503,
             errors: [{ message: 'access forbidden' }],
           });
-          res.status(200).json({ jwt });
+          res.status(200).json({ jwt , userId: foundUser._id});
           // res.status(201).json({message: 'Logged In'});
         });
       } else {
