@@ -1,7 +1,9 @@
 const db = require('../models');
 
 const create = async(req, res) => {
-  const project = req.body;
+  
+  const user = req.curUserId;
+  const project = {...req.body, user};
   console.log(project);
 
   if (!project.title || !project.content || !project.endDate) {
@@ -12,7 +14,11 @@ const create = async(req, res) => {
   }
 
   try {
+    const foundUser = await db.User.findById(user);
     const newProject = await db.Project.create(project);
+    foundUser.ownPj.push(newProject);
+    const savedUser = await foundUser.save();
+    console.log(newProject);
     res.status(200).json(newProject)
   } catch (err) {
     return res.status(500).json({
@@ -34,7 +40,7 @@ const update = async(req, res) => {
 }
 const show = async(req, res) => {
   try {
-    let showProject = await db.Project.findById(req.params.id);
+    let showProject = await db.Project.findById(req.params.id).populate('user');
     console.log(showProject)
     res.status(200).json(showProject)
   } catch (err){

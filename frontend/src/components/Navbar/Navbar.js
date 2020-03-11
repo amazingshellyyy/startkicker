@@ -1,6 +1,6 @@
 import React from 'react';
-import { Nav, Navbar, Form, NavDropdown, FormControl, Button } from 'react-bootstrap';
-import { NavLink, Link } from 'react-router-dom';
+import { Nav, Navbar } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 class Navig extends React.Component{
   constructor(props){
@@ -17,8 +17,10 @@ class Navig extends React.Component{
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
           <NavLink className="nav-link" to='/payment'>Payment</NavLink>
-            <Nav.Link href="#home">Explore</Nav.Link>
-            <Nav.Link href="#link">Start a project</Nav.Link>
+          <NavLink className="nav-link" to='/create'>Start a project</NavLink>
+          <NavLink className="nav-link" to='/project'>see a project</NavLink>
+          <Nav.Link href="#home">Explore</Nav.Link>
+            
           </Nav>
           <Navbar.Brand href="#home" className="ml-auto mr-auto">Startkicker</Navbar.Brand>
           <Nav className="ml-auto">

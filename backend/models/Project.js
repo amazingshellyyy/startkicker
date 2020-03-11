@@ -15,7 +15,7 @@ const ProjectSchema = mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: 'Plan'
   },
-  author: {
+  user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
