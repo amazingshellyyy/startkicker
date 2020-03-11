@@ -14,16 +14,21 @@ const PlanSchema = mongoose.Schema({
   price: {
     type: Number,
   },
+  estDelivery: {
+    type: Date,
+  },
   project: {
     type: Schema.Types.ObjectId,
     ref: 'Project'
   },
-  estDelivery: {
-    type: Date,
+  user:{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
   },
-  shipDes: {
-    type: String
-  }
+  backers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 const Plan = mongoose.model('Plan', PlanSchema);

@@ -51,7 +51,13 @@ const show = async(req, res) => {
 }
 const destroy = async(req, res) => {
   try {
-    let deletedProject = await db.Project.findByIdAndDelete(req.params.id)
+    let foundProject = await db.Project.findById(req.params.id);
+    foundProject.plan.forEach(plan => {
+      db.Plan.findByIdAndDelete(plan, (err, deletedPlan) =>{
+        if(err) return res.status(500).send(err)
+      })
+    });
+    let deletedProject = await db.Project.findByIdAndDelete(req.params.id);
     console.log(deletedProject)
     res.status(200).json({message:'successfully deleted',deletedProject})
   } catch(err) {

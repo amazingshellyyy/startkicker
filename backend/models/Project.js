@@ -11,10 +11,10 @@ const ProjectSchema = mongoose.Schema({
   image: {
     type: String,
   },
-  plan: {
+  plan: [{
     type: Schema.Types.ObjectId,
     ref: 'Plan'
-  },
+  }],
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
