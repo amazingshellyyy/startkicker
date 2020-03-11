@@ -4,7 +4,7 @@ import DatePicker from "react-day-picker";
 import 'react-day-picker/lib/style.css'
 import axios from 'axios';
 import { withRouter } from "react-router";
-
+import checkIfUserIsLoggedIn from '../../Wrapper/checkIfUserIsLoggedIn';
 
 class ProjectForm extends React.Component {
   
@@ -18,12 +18,12 @@ class ProjectForm extends React.Component {
       endDate: undefined,
     }
   }
-  componentDidMount(){
-    const jwt = localStorage.getItem('jwt');
-    if(!jwt){
-      this.props.history.push('/login')
-    }
-  }
+  // componentDidMount(){
+  //   const jwt = localStorage.getItem('jwt');
+  //   if(!jwt){
+  //     this.props.history.push('/login')
+  //   }
+  // }
   handleSubmit = event =>{
     event.preventDefault();
     console.log('create a project')
@@ -114,4 +114,4 @@ class ProjectForm extends React.Component {
 }
 
 
-export default withRouter(ProjectForm);
+export default withRouter(checkIfUserIsLoggedIn(ProjectForm));

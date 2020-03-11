@@ -8,8 +8,6 @@ const stripePromise = loadStripe("pk_test_LS379O30gWnSDhwufbwDW00n000Zu7rz1X");
 
 
 class Payment extends Component {
-  
-
  
 render(){
 
