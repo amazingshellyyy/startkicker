@@ -12,15 +12,17 @@ const create = async(req, res) => {
   if (project.goal < 0 || project.goal == 0){
     return res.status(400).json({message:'the goal cannot be equal to or smaller than 0'})
   }
-
+ 
   try {
     const foundUser = await db.User.findById(user);
     const newProject = await db.Project.create(project);
+
     foundUser.ownPj.push(newProject);
     const savedUser = await foundUser.save();
-    console.log(newProject);
+    console.log('newPorject',newProject);
     res.status(200).json(newProject)
   } catch (err) {
+    
     return res.status(500).json({
       message: 'Something went wrong when creating a new project', err: err
     })
@@ -40,7 +42,7 @@ const update = async(req, res) => {
 }
 const show = async(req, res) => {
   try {
-    let showProject = await db.Project.findById(req.params.id).populate('user');
+    let showProject = await db.Project.findById(req.params.id).populate('user').populate('plan');
     console.log(showProject)
     res.status(200).json(showProject)
   } catch (err){

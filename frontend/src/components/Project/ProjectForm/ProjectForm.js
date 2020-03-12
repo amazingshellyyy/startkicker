@@ -5,6 +5,7 @@ import 'react-day-picker/lib/style.css'
 import axios from 'axios';
 import { withRouter } from "react-router";
 import checkIfUserIsLoggedIn from '../../Wrapper/checkIfUserIsLoggedIn';
+import PlanList from '../../Plan/PlanList';
 
 class ProjectForm extends React.Component {
   
@@ -12,10 +13,12 @@ class ProjectForm extends React.Component {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
     this.state = {
+      projectId: '',
       title: '',
       content: '',
       goal: 0,
       endDate: undefined,
+      show: false
     }
   }
   // componentDidMount(){
@@ -31,8 +34,12 @@ class ProjectForm extends React.Component {
     axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, {headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
       .then(res => {
         console.log(res.data)
-
-        this.props.history.push(`/project/${res.data._id}`)
+        this.setState({
+          show: true,
+          projectId: res.data._id
+        })
+        
+       
       })
       .catch (err => {
         console.log(err.response)
@@ -61,11 +68,16 @@ class ProjectForm extends React.Component {
     console.log('content', this.state.content)
     console.log('goal', this.state.goal) 
   }
+  handleNext = event => {
+    event.preventDefault();
+    this.props.history.push(`/create/project/${this.state.projectId}/plan`)
+  }
+  
   render() {
     return (
       <>
 
-        <Container className="mt-5 pt-5">
+        <Container className="mt-5 mb-5 pb-5 pt-3">
           <Row>
             <Col></Col>
             <Col className="text-center">
@@ -100,13 +112,17 @@ class ProjectForm extends React.Component {
                       <p>Please select a day.</p>
                     )}
                 </Form.Group>
-                <Button className="" variant="primary" type="submit">
-                  Submit
-                </Button>
+                  { this.state.show ? <Button variant="outline-primary" onClick={this.handleNext}>Next: create plans</Button>:  <Button variant="primary" type="submit">
+                  Save
+                </Button>}
+               
+                
+                
               </Form></Col>
             <Col></Col>
 
           </Row>
+          
         </Container>
       </>
     )

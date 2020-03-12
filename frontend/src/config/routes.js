@@ -8,6 +8,7 @@ import Project from '../components/Project/Project'
 import ProjectForm from '../components/Project/ProjectForm/ProjectForm';
 import EditProject from '../components/EditProject/EditProject';
 import LoggedInRequired from '../components/Wrapper/checkIfUserIsLoggedIn';
+import PlanList from '../components/Plan/PlanList'
 
 export default ({ isLogin, curUser, setCurrentUser }) => (
   <Switch>
@@ -23,7 +24,8 @@ export default ({ isLogin, curUser, setCurrentUser }) => (
       )}/>
     <Route path='/project/:projectId/edit' render={() => (<EditProject isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
     <Route path='/project/:projectId' render={() => (<Project isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
-    <Route path='/create' render={() => (<ProjectForm isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
+    <Route path='/create/project/:projectId/plan' render={() => (<PlanList isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
+    <Route path='/create/project' render={() => (<ProjectForm isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
    
   </Switch>
 );
