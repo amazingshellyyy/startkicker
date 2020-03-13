@@ -3,14 +3,15 @@ import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { withRouter } from "react-router";
 import qs from 'query-string';
 import axios from 'axios';
-import './PlanCard.css'
+import './PlanCard.css';
+import moment from 'moment';
 
 class PlanCard extends React.Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      plan: this.props.plan,
+      
       border: '',
       show: false
     }
@@ -20,7 +21,7 @@ class PlanCard extends React.Component {
   addBorder = () => {
     const planId = qs.parse(this.props.location.search).id
     if (planId == this.props.plan._id) {
-      return '3px solid red'
+      return '3px solid antiquewhite'
     } else {
       return ''
     }
@@ -36,7 +37,7 @@ class PlanCard extends React.Component {
 
   handleDelete = event => {
     event.preventDefault();
-    axios.delete(`${process.env.REACT_APP_API_URL}/plan/${this.state.plan._id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/plan/${this.props.plan._id}`)
       .then(res => {
         console.log(res.data)
         this.setState({
@@ -49,12 +50,12 @@ class PlanCard extends React.Component {
   }
   handleClick = () => {
     // event.preventDefault();
-    console.log(this.state.plan._id)
-    this.props.handleSelect(this.state.plan._id)
+    console.log(this.props.plan._id)
+    this.props.handleSelect(this.props.plan._id)
 
   }
   handleModal = () => {
-    if (this.state.show) {
+    if (this.props.show) {
       this.setState({
         show: false
       })
@@ -70,28 +71,29 @@ class PlanCard extends React.Component {
       <Row className="">
 
         <Col>
-          {this.state.plan.price &&
+          {this.props.plan &&
             <>
               <Card onClick={() => {
                 if (this.props.match.path == '/project/:projectId/plan/checkout') {
                   this.handleClick()
                 }
               }}
-                className="detail-show" style={{ border: this.addBorder(), backgroundColor: this.state.show }}>
+                className="detail-show" style={{ border: this.addBorder(), backgroundColor: this.props.show }}>
                 <Card.Body>
-                  <Card.Title>Pledge US${this.state.plan.price}</Card.Title>
-                  <Card.Subtitle className="mt-3 mb-2">{this.state.plan.subtitle}</Card.Subtitle>
-                  <Card.Text className="text-muted">{this.state.plan.content}</Card.Text>
+                  <Card.Title>Pledge US${this.props.plan.price}</Card.Title>
+                  <Card.Subtitle className="mt-3 mb-2">{this.props.plan.subtitle}</Card.Subtitle>
+                  <Card.Text className="text-muted">{this.props.plan.content}</Card.Text>
                   <div>
                     <small className="text-muted">ESTIMATE DELIVERY</small>
-                    <Card.Text>{this.state.plan.estDelivery}</Card.Text>
+                    <Card.Text>{moment(this.props.plan.estDelivery).format('LL')}</Card.Text>
                   </div>
                   <div>
-                    <small className="text-muted">{this.state.plan.backers.length} bakers</small>
-                  </div>{(this.props.curUser === this.state.plan.user) && <>
+                    
+                    <small className="text-muted">{this.props.plan.backers && this.props.plan.backers.length} bakers</small>
+                  </div>{(this.props.curUser === this.props.plan.user) && <>
                     <Button variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
                     <Button variant="outline-danger" onClick={this.handleModal}>Delete</Button>
-                    <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
+                    <Modal className="modal" show={this.props.show} onHide={this.handleModal}>
                       <Modal.Header closeButton>
                         <Modal.Title>Are you Sure?</Modal.Title>
                       </Modal.Header>

@@ -1,30 +1,31 @@
 import React from 'react';
-import {ElementsConsumer, CardElement} from '@stripe/react-stripe-js';
+import { ElementsConsumer, CardElement } from '@stripe/react-stripe-js';
 import axios from 'axios';
 import { withRouter } from "react-router";
 import CardSection from '../CardSection/CardSection';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 class CheckoutForm extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    this.state= {
+    this.state = {
       client_secret: '',
       curPlan: {},
       amount: 0,
       curUser: {},
       display: "none",
-      display2:""
+      display2: ""
     }
   }
-  
-  componentDidMount(){
+
+  componentDidMount() {
     const planId = this.props.match.params.planId
     axios.get(`${process.env.REACT_APP_API_URL}/plan/${planId}`)
       .then(res => {
-        console.log('GET plan',res.data)
+        console.log('GET plan', res.data)
         this.setState({
           curPlan: res.data,
-          amount: (res.data.price)*100
+          amount: (res.data.price) * 100
         })
       })
       .catch(err => {
@@ -33,17 +34,17 @@ class CheckoutForm extends React.Component {
     console.log(this.state)
   }
 
-  getcurUser(curUser){
+  getcurUser(curUser) {
     axios.get(`${process.env.REACT_APP_API_URL}/user/${curUser}`)
-    .then(res => {
-      console.log(res.data)
-      this.setState({
-        curUser: res.data
+      .then(res => {
+        console.log(res.data)
+        this.setState({
+          curUser: res.data
+        })
       })
-    })
-    .catch(err=>{
-      console.log(err)
-    })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleSubmit = async (event) => {
@@ -65,26 +66,26 @@ class CheckoutForm extends React.Component {
     // console.log(this.state)
     // console.log(this.state.curPlan)
     // amount,currency,customer,metadata
-    const objectToSend={
+    const objectToSend = {
       amount: this.state.amount,
       currency: "usd",
-      metadata: {...this.state.curPlan,userId}
+      metadata: { ...this.state.curPlan, userId }
     }
-    console.log("objectToSend",objectToSend);
-     //a request to api route first to get the client secret
-    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`,objectToSend)
+    console.log("objectToSend", objectToSend);
+    //a request to api route first to get the client secret
+    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend)
       .then(res => {
         console.log(res.data);
-        
-        this.handlePayment(res.data.client_secret, this.state.username)
+
+        this.handlePayment(res.data.client_secret)
       })
       .catch(err => {
         console.log(err.response)
       })
   };
 
-  handlePayment = async(client_secret,username) =>{
-    const {stripe, elements} = this.props
+  handlePayment = async (client_secret) => {
+    const { stripe, elements } = this.props
 
     if (!stripe || !elements) {
       // Stripe.js has not yet loaded.
@@ -94,9 +95,6 @@ class CheckoutForm extends React.Component {
     const result = await stripe.confirmCardPayment(client_secret, {
       payment_method: {
         card: elements.getElement(CardElement),
-        billing_details: {
-          name: this.state.username
-        },
       }
     });
 
@@ -119,7 +117,7 @@ class CheckoutForm extends React.Component {
       }
     }
   }
-  toProfile= event => {
+  toProfile = event => {
     event.preventDefault();
     this.props.history.push(`/profile/${this.props.curUser}`)
   }
@@ -127,14 +125,25 @@ class CheckoutForm extends React.Component {
   render() {
     return (
       <>
-      <form onSubmit={this.handleSubmit.bind(this)}>
-        <CardSection />
-        <button disabled={!this.props.stripe} style={{display:this.state.display2}}>Confirm order</button>
-      </form>
-      <div style={{display:this.state.display}}>
-        <p>Payment success</p>
-        <button onClick={this.toProfile}>See All the project you back</button>
-      </div>
+        {/* <Container style={{ height: "80vh" }}> */}
+          <Row className="mt-5" style={{ minHeight: "75vh" }}>
+            
+            <Col>
+            <form onSubmit={this.handleSubmit.bind(this)}>
+              <CardSection />
+              <Container className="p-0">
+              <div style={{ display: this.state.display }}>
+                <p>Payment success</p>
+                <Button variant="outline-primary" onClick={this.toProfile}>See All the project you back</Button>
+              </div>
+              <Button className="mt-4" variant="outline-primary" disabled={!this.props.stripe} style={{ display: this.state.display2 }} type="submit">Confirm order</Button>
+              </Container>
+            </form>
+              
+            </Col>
+            
+          </Row>
+        {/* </Container> */}
       </>
     );
   }
@@ -142,11 +151,11 @@ class CheckoutForm extends React.Component {
 
 const CheckoutFormWithRouter = withRouter(CheckoutForm)
 
-export default function InjectedCheckoutForm(props){
-  
+export default function InjectedCheckoutForm(props) {
+
   return (
     <ElementsConsumer>
-      {({stripe, elements}) => (
+      {({ stripe, elements }) => (
         <CheckoutFormWithRouter {...props} stripe={stripe} elements={elements} />)
       }
     </ElementsConsumer>

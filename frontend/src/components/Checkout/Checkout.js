@@ -26,7 +26,8 @@ class Checkout extends React.Component {
   render(){
     return(
       <>
-      <Container className="mt-5">
+      <div style={{minHeight: "75vh"}}>
+      <Container className="mt-5" >
         <Row>
           <Col>
           <h3>Celebrate bringing this project to life</h3>
@@ -37,6 +38,7 @@ class Checkout extends React.Component {
       </Container>
       
       <PlanList handleSelect={this.handleSelect.bind(this)} show={this.state.show} selectedId={this.state.seletedId}/>
+      </div>
       </>
     )
   }

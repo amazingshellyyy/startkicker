@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal, ProgressBar } from 'react-bootstrap';
 import { withRouter } from "react-router";
 import './Project.css'
 import PlanList from '../Plan/PlanList';
@@ -70,6 +70,10 @@ class Project extends React.Component {
     event.preventDefault();
     this.props.history.push(this.props.location.pathname.concat(`/plan/checkout`))
   }
+
+  displayPercent = (balance,goal) => {
+    return balance/goal*100
+  }
   
 
   render() {
@@ -87,7 +91,9 @@ class Project extends React.Component {
                       <Col sm={8}><img width="100%" src={this.state.curProject.image} /></Col>
                       <Col sm={4} className="text-left">
                         <div className="mb-3">
-                          <h3 className="m-0">${this.state.curProject.goal}</h3>
+                          
+                          <ProgressBar className="mt-5 mb-3" animated now={this.displayPercent(this.state.curProject.balance, this.state.curProject.goal)} />
+                          <h3 className="m-0">${this.state.curProject.balance}</h3>
                           <small className="text-muted">pledged of {this.state.curProject.goal} goal</small>
                         </div>
                         <div className="mb-3">
@@ -95,8 +101,8 @@ class Project extends React.Component {
                           <small className="text-muted">backers</small>
                         </div>
                         <div className="mb-3">
-                          <h3 className="m-0">{moment(this.state.curProject.endDate).fromNow().substring(2, 5)}</h3>
-                          <small className="text-muted">days to go</small>
+                          <h3 className="m-0">{moment(this.state.curProject.endDate).fromNow()}</h3>
+                          <small className="text-muted">time till end</small>
                         </div>
 
 

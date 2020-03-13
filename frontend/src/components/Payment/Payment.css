@@ -1,4 +1,11 @@
+.detail-show{
+  
+}
 
+.detail-show:hover {
+  background-color: none;
+  /* cursor: pointer; */
+}
 
 
 /**

@@ -33,7 +33,7 @@ class ProjectCard extends React.Component {
       return (
         <>
         <small className="text-muted">Plan Price</small>
-        <Card.Text>{this.handlePrice(this.props.selectPlan)}</Card.Text>
+        <Card.Text>${this.handlePrice(this.props.selectPlan)}</Card.Text>
       </>
       )
     } else{

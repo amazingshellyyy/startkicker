@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import {Container} from 'react-bootstrap';
 import Naviga from './components/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './config/routes';
@@ -51,6 +51,11 @@ render(){
      
       
       <Routes isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout} curUser={this.state.curUser}/>
+      <div className="jumbotron mb-0 mt-5 pt-0">
+          <Container>
+          <p className="pt-5 lead text-center">Startkicker, INC © 2020</p>       
+            </Container>
+        </div>
         
     </>
   );

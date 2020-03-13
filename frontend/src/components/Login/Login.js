@@ -24,7 +24,7 @@ class Login extends React.Component {
         console.log(res.data.jwt)
         let jwt = res.data.jwt;
         this.props.setCurrentUser(jwt, res.data.userId);
-        this.props.history.goBack();
+        this.props.history.push( `/profile/${res.data.userId}`);
       })
       .catch(err => {
         console.log(err.response)
@@ -37,7 +37,7 @@ class Login extends React.Component {
     return (
       <>
      
-        <Container className="mt-5 pt-5">
+        <Container className="mt-5 pt-5" style={{minHeight:'75vh'}}>
           <Row>
             <Col></Col>
             <Col className="text-center">

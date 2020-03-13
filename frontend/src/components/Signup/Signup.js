@@ -47,7 +47,7 @@ class Signup extends React.Component {
     return (
       <>
      
-        <Container className="mt-5 pt-5">
+        <Container className="mt-5 pt-5" style={{minHeight:'75vh'}}>
           <Row>
             <Col></Col>
             <Col className="text-center">
