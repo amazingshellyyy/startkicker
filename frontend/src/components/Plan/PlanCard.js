@@ -1,29 +1,31 @@
 import React from 'react';
-import {  Row, Col, Card, Button } from 'react-bootstrap';
+import { Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { withRouter } from "react-router";
 import qs from 'query-string';
 import axios from 'axios';
+import './PlanCard.css'
 
 class PlanCard extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
-    
+
     this.state = {
       plan: this.props.plan,
-      border: '' 
+      border: '',
+      show: false
     }
   }
- 
- 
-  addBorder=()=> {
-    const planId=qs.parse(this.props.location.search).id
+
+
+  addBorder = () => {
+    const planId = qs.parse(this.props.location.search).id
     if (planId == this.props.plan._id) {
-     return '3px solid red'
+      return '3px solid red'
     } else {
       return ''
     }
   }
-  handleEdit= event => {
+  handleEdit = event => {
     event.preventDefault();
     this.props.updateEditPlan(this.props.plan._id);
     this.props.history.push({
@@ -38,47 +40,80 @@ class PlanCard extends React.Component {
       .then(res => {
         console.log(res.data)
         this.setState({
-          plan:{}
+          plan: {}
         })
       })
       .catch(err => {
         console.log(err)
       })
   }
-  
+  handleClick = () => {
+    // event.preventDefault();
+    console.log(this.state.plan._id)
+    this.props.handleSelect(this.state.plan._id)
 
-  render(){
+  }
+  handleModal = () => {
+    if (this.state.show) {
+      this.setState({
+        show: false
+      })
+    } else {
+      this.setState({
+        show: true
+      })
+    }
+  }
+
+  render() {
     return (
       <Row className="">
-        <Col></Col>
+
         <Col>
-          {this.state.plan.title && 
-          <>
-          <Card style={{ width: '20rem', minHeight: '20rem', margin:"10px", border:this.addBorder()}}>
-          <Card.Body>
-          <Card.Title>{this.state.plan.title}</Card.Title>
-            <Card.Subtitle className="mt-3 mb-2">{this.state.plan.subtitle}</Card.Subtitle>
-            <Card.Text className="text-muted">{this.state.plan.content}</Card.Text>
-            <div>
-            <small className="text-muted">ESTIMATE DELIVERY</small>
-            <Card.Text>{this.state.plan.estDelivery}</Card.Text>
-            </div>
-            <div>
-            <small className="text-muted">{this.state.plan.backers.length} bakers</small>
-            </div>{(this.props.curUser === this.state.plan.user)&&<>
-            <Button variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
-            <Button variant="outline-danger" onClick={this.handleDelete}>Delete</Button></>}
-            
-          </Card.Body>
-          </Card>
-          </>}
+          {this.state.plan.price &&
+            <>
+              <Card onClick={() => {
+                if (this.props.match.path == '/project/:projectId/plan/checkout') {
+                  this.handleClick()
+                }
+              }}
+                className="detail-show" style={{ border: this.addBorder(), backgroundColor: this.state.show }}>
+                <Card.Body>
+                  <Card.Title>Pledge US${this.state.plan.price}</Card.Title>
+                  <Card.Subtitle className="mt-3 mb-2">{this.state.plan.subtitle}</Card.Subtitle>
+                  <Card.Text className="text-muted">{this.state.plan.content}</Card.Text>
+                  <div>
+                    <small className="text-muted">ESTIMATE DELIVERY</small>
+                    <Card.Text>{this.state.plan.estDelivery}</Card.Text>
+                  </div>
+                  <div>
+                    <small className="text-muted">{this.state.plan.backers.length} bakers</small>
+                  </div>{(this.props.curUser === this.state.plan.user) && <>
+                    <Button variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
+                    <Button variant="outline-danger" onClick={this.handleModal}>Delete</Button>
+                    <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
+                      <Modal.Header closeButton>
+                        <Modal.Title>Are you Sure?</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>You are trying to delete a plan, are you sure you want to delete?</Modal.Body>
+                      <Modal.Footer>
+                        <Button className="btn btn-danger" variant="primary" onClick={this.handleDelete}>Delete</Button>
+                        <Button variant="secondary" onClick={this.handleModal}>Close</Button>
+
+                      </Modal.Footer>
+                    </Modal></>}
+
+
+                </Card.Body>
+              </Card>
+            </>}
         </Col>
-        <Col></Col>
-      
+
+
       </Row>
     )
   }
-  
+
 }
 
 

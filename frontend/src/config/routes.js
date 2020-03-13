@@ -8,7 +8,9 @@ import Project from '../components/Project/Project'
 import ProjectForm from '../components/Project/ProjectForm/ProjectForm';
 import EditProject from '../components/EditProject/EditProject';
 import LoggedInRequired from '../components/Wrapper/checkIfUserIsLoggedIn';
-import PlanList from '../components/Plan/PlanList'
+import PlanList from '../components/Plan/PlanList';
+import Profile from '../components/Profile/Profile';
+import Checkout from '../components/Checkout/Checkout';
 
 export default ({ isLogin, curUser, setCurrentUser }) => (
   <Switch>
@@ -22,11 +24,15 @@ export default ({ isLogin, curUser, setCurrentUser }) => (
       LoggedInRequired(
         () => <Payment curUser={curUser} setCurrentUser={setCurrentUser}/>
       )}/>
+      <Route path='/project/:projectId/plan/checkout/:planId' render={() => (<Payment isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
+    <Route path='/project/:projectId/plan/checkout' render={() => (<Checkout isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
     <Route path='/project/:projectId/edit' render={() => (<EditProject isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
     <Route path='/project/:projectId' render={() => (<Project isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
+    
     <Route path='/create/project/:projectId/plan' render={() => (<PlanList isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
+    <Route path='/profile/:userId' render={() => (<Profile isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
     <Route path='/create/project' render={() => (<ProjectForm isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
-   
+    
   </Switch>
 );
 
