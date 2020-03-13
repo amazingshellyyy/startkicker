@@ -36,7 +36,7 @@ class Signup extends React.Component {
         console.log(res.data.jwt)
         let jwt = res.data.jwt
         this.props.setCurrentUser(jwt, res.data.userId);
-        this.props.history.goBack();
+        this.props.history.push('/');
       })
       .catch(err => {
         console.log(err.response)
