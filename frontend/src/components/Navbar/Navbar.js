@@ -19,7 +19,7 @@ class Navig extends React.Component{
           <NavLink className="nav-link" to='/payment'>Payment</NavLink>
           <NavLink className="nav-link" to='/create/project'>Start a project</NavLink>
           <NavLink className="nav-link" to='/project'>see a project</NavLink>
-          <Nav.Link href="#home">Explore</Nav.Link>
+          <NavLink className="nav-link" to='/'>Explore</NavLink>
             
           </Nav>
           <Navbar.Brand href="#home" className="ml-auto mr-auto">Startkicker</Navbar.Brand>
@@ -28,7 +28,7 @@ class Navig extends React.Component{
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />
             <Button variant="outline-success">Search</Button>
           </Form> */}
-          { this.props.isLogin ?  <><NavLink className="nav-link" to='/profile'>Profile</NavLink>
+          { this.props.isLogin ?  <><NavLink className="nav-link" to={`/profile/${this.props.curUser}`}>Profile</NavLink>
           <NavLink className="nav-link" to='/' onClick={this.props.handleLogout}>Logout</NavLink></> : <><NavLink className="nav-link" to='/login'>Login</NavLink>
           <NavLink className="nav-link" to='/signup'>Signup</NavLink></>}
           

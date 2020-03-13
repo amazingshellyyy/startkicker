@@ -28,8 +28,13 @@ const ProjectSchema = mongoose.Schema({
   },
   endDate: {
     type: Date,
+  },
+  backersNum: {
+    type: Number
+  },
+  image: {
+    type: String
   }
-
 });
 
 const Project = mongoose.model('Project', ProjectSchema);

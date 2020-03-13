@@ -69,11 +69,24 @@ const destroy = async(req, res) => {
   }
 }
 
+const showAll = async(req, res) => {
+  try{
+    const allProject = await db.Project.find({}).populate('user').populate('plan')
+    res.status(200).json(allProject)
+  }catch(err){
+    console.log(err)
+    return res.status(500).json({
+      message: 'Something went wrong when trying to get all projects'
+    })
+  }
+}
+
 module.exports = {
   create,
   update,
   show,
-  destroy
+  destroy,
+  showAll
 }
 
 

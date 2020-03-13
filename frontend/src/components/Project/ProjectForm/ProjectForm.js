@@ -8,7 +8,7 @@ import checkIfUserIsLoggedIn from '../../Wrapper/checkIfUserIsLoggedIn';
 import PlanList from '../../Plan/PlanList';
 
 class ProjectForm extends React.Component {
-  
+
   constructor(props) {
     super(props);
     this.handleDayClick = this.handleDayClick.bind(this);
@@ -18,7 +18,8 @@ class ProjectForm extends React.Component {
       content: '',
       goal: 0,
       endDate: undefined,
-      show: false
+      show: false,
+      image:''
     }
   }
   // componentDidMount(){
@@ -27,21 +28,21 @@ class ProjectForm extends React.Component {
   //     this.props.history.push('/login')
   //   }
   // }
-  handleSubmit = event =>{
+  handleSubmit = event => {
     event.preventDefault();
     console.log('create a project')
     console.log(this.state)
-    axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, {headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
+    axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         console.log(res.data)
         this.setState({
           show: true,
           projectId: res.data._id
         })
-        
-       
+
+
       })
-      .catch (err => {
+      .catch(err => {
         console.log(err.response)
       })
 
@@ -66,13 +67,13 @@ class ProjectForm extends React.Component {
     })
     console.log('title', this.state.title)
     console.log('content', this.state.content)
-    console.log('goal', this.state.goal) 
+    console.log('goal', this.state.goal)
   }
   handleNext = event => {
     event.preventDefault();
     this.props.history.push(`/create/project/${this.state.projectId}/plan`)
   }
-  
+
   render() {
     return (
       <>
@@ -86,6 +87,16 @@ class ProjectForm extends React.Component {
                 <Form.Group controlId="formBasictitle">
                   <Form.Control type="text" name="title" placeholder="Enter Project title" onChange={this.handleChange} />
                 </Form.Group>
+                <InputGroup className="mb-3">
+                  <InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">URL</InputGroup.Text>
+                  </InputGroup.Prepend>
+                  <FormControl
+                    placeholder="Image URL"
+                    name="image"
+                    onChange={this.handleChange}
+                  />
+                </InputGroup>
                 <Form.Group controlId="formBasiccontent">
                   <Form.Control as="textarea" rows="10" name="content" placeholder="Tell us about your project!" onChange={this.handleChange} />
                 </Form.Group>
@@ -105,24 +116,24 @@ class ProjectForm extends React.Component {
                 </Form.Group> */}
                 <Form.Group>
                   <Form.Label>Label</Form.Label>
-                  <DatePicker id="example-datepicker" onDayClick={this.handleDayClick} selectedDays={this.state.endDate} disabledDays={ {before: new Date()}} />
+                  <DatePicker id="example-datepicker" onDayClick={this.handleDayClick} selectedDays={this.state.endDate} disabledDays={{ before: new Date() }} />
                   {this.state.endDate ? (
                     <p>You clicked {this.state.endDate.toLocaleDateString()}</p>
                   ) : (
                       <p>Please select a day.</p>
                     )}
                 </Form.Group>
-                  { this.state.show ? <Button variant="outline-primary" onClick={this.handleNext}>Next: create plans</Button>:  <Button variant="primary" type="submit">
+                {this.state.show ? <Button variant="outline-primary" onClick={this.handleNext}>Next: create plans</Button> : <Button variant="primary" type="submit">
                   Save
                 </Button>}
-               
-                
-                
+
+
+
               </Form></Col>
             <Col></Col>
 
           </Row>
-          
+
         </Container>
       </>
     )

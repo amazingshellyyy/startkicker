@@ -1,17 +1,20 @@
 import React from 'react';
 import axios from 'axios';
-import {Container, Row, Col, Button, Modal} from 'react-bootstrap';
+import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap';
 import { withRouter } from "react-router";
 import './Project.css'
-import PlanList from '../Plan/PlanList'
+import PlanList from '../Plan/PlanList';
+import moment from 'moment';
+
+const pattern = "[0-9]+".r
 class Project extends React.Component {
   state = {
     curProject: {},
     show: false
   }
 
-  componentDidMount(){
-    
+  componentDidMount() {
+
     const projectId = this.props.match.params.projectId;
     console.log(projectId);
     axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`)
@@ -21,7 +24,7 @@ class Project extends React.Component {
           curProject: res.data
         })
       })
-      .catch (err => {
+      .catch(err => {
         console.log(err.response)
         this.props.history.push('/');
       })
@@ -36,7 +39,7 @@ class Project extends React.Component {
     event.preventDefault();
     console.log('delete')
     const projectId = this.props.match.params.projectId;
-    axios.delete(`${process.env.REACT_APP_API_URL}/project/${projectId}`,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
+    axios.delete(`${process.env.REACT_APP_API_URL}/project/${projectId}`, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
         console.log(res.data)
         this.props.history.push('/');
@@ -45,67 +48,123 @@ class Project extends React.Component {
         console.log(err.response)
       })
   }
-  
+
 
   handleModal = () => {
     if (this.state.show) {
       this.setState({
-        show:false
+        show: false
       })
-    }else {
+    } else {
       this.setState({
-        show:true
+        show: true
       })
-    } 
+    }
   }
-handleAddPlan= event => {
-  event.preventDefault();
-  this.props.history.push(`/create/project/${this.state.curProject._id}/plan`)
-}
-render(){
+  handleAddPlan = event => {
+    event.preventDefault();
+    this.props.history.push(`/create/project/${this.state.curProject._id}/plan`)
+  }
 
-  return(
-    <Container className="mt-5">
-      {this.state.curProject &&<>
-      <Row>
-      <Col></Col>
-      <Col>
-      { (this.state.curProject && this.state.curProject.user)&&  <>
-        <h1>{this.state.curProject.title}</h1>
-        <p>{this.state.curProject.content}</p>
-        <div>{this.state.curProject.goal}</div>
-        <div>{this.state.curProject.endDate}</div>
-        <div>{this.state.curProject.user.username}</div>
-      </> }
-      {(this.state.curProject.user&&this.state.curProject.user._id === this.props.curUser)&&<>
-      <Button onClick={this.handleEdit}>Edit</Button>
-      <Button onClick={this.handleModal}>Delete</Button>
-      <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
-      <Modal.Header closeButton>
-        <Modal.Title>Are you Sure?</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>You are trying to delete a project you owned, are you sure you want to delete?</Modal.Body>
-      <Modal.Footer>
-      <Button className="btn btn-danger" variant="primary" onClick={this.handleDelete}>
-          Delete
-        </Button>
-        <Button variant="secondary" onClick={this.handleModal}>
-          Close
-        </Button>
-        
-      </Modal.Footer>
-    </Modal>
-      </>}
-      </Col>
-      <Col></Col>
-    </Row>
-    {(this.state.curProject.plan && this.state.curProject.plan.length !== 0) && <PlanList plans={this.state.curProject.plan} curUser={this.props.curUser}/>}
-    {this.state.curProject.plan&&this.state.curProject.plan.length == 0 &&(this.props.curUser === this.state.curProject.user._id)&&<Button onClick={this.handleAddPlan}>Add Plans</Button>}
-    </>}
-      
-    </Container>
-  )
-}
+  handleBacking = event => {
+    event.preventDefault();
+    this.props.history.push(this.props.location.pathname.concat(`/plan/checkout`))
+  }
+  
+
+  render() {
+
+    return (
+      <>
+        {this.state.curProject && <>
+          <div className="head">
+            <Container>
+              <Row>
+                <Col>{(this.state.curProject && this.state.curProject.user) && <>
+                  <div className="text-center pt-5 pb-5 mb-3">
+                    <h3>{this.state.curProject.title}</h3>
+                    <Row>
+                      <Col sm={8}><img width="100%" src={this.state.curProject.image} /></Col>
+                      <Col sm={4} className="text-left">
+                        <div className="mb-3">
+                          <h3 className="m-0">${this.state.curProject.goal}</h3>
+                          <small className="text-muted">pledged of {this.state.curProject.goal} goal</small>
+                        </div>
+                        <div className="mb-3">
+                          <h3 className="m-0">{this.state.curProject.backersNum}</h3>
+                          <small className="text-muted">backers</small>
+                        </div>
+                        <div className="mb-3">
+                          <h3 className="m-0">{moment(this.state.curProject.endDate).fromNow().substring(2, 5)}</h3>
+                          <small className="text-muted">days to go</small>
+                        </div>
+
+
+                        {/* <div>{this.state.curProject.user.username}</div> */}
+                        <div className="mt-5">
+                          {(this.state.curProject.user && this.state.curProject.user._id === this.props.curUser) ? <>
+                            <Button onClick={this.handleEdit}>Edit</Button>
+                            <Button onClick={this.handleModal}>Delete</Button>
+                            <Button onClick={this.handleAddPlan}>Add more plans</Button>
+                            <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
+                              <Modal.Header closeButton>
+                                <Modal.Title>Are you Sure?</Modal.Title>
+                              </Modal.Header>
+                              <Modal.Body>You are trying to delete a project you owned, are you sure you want to delete?</Modal.Body>
+                              <Modal.Footer>
+                                <Button className="btn btn-danger" variant="primary" onClick={this.handleDelete}>Delete</Button>
+                                <Button variant="secondary" onClick={this.handleModal}>Close</Button>
+                                
+                              </Modal.Footer>
+                            </Modal>
+
+                          </> : <Button onClick={this.handleBacking}>Back the Project</Button>}</div>
+                      </Col>
+
+
+
+                    </Row>
+                  </div>
+
+                </>}
+                </Col>
+              </Row>
+            </Container>
+          </div>
+          <Container className="pt-5">
+            <Row>
+              <Col sm={8}>
+              <h3>Our Story</h3>
+              <p className="text-justify">{this.state.curProject.content}</p></Col>
+              <Col sm={4}>
+                <Container>
+                  <Row>
+                    <Col>
+                      <Row>
+                        
+                        <Col>{(this.state.curProject && this.state.curProject.user) &&
+                          <Card style={{ width: '20rem', margin: "10px" }}>
+                            <Card.Body>
+                              <small className="text-muted">About the Creater</small>
+                              <Card.Title>{this.state.curProject.user.username}</Card.Title>
+                            </Card.Body>
+                          </Card>
+                        }</Col>
+                        
+                      </Row>
+                    </Col>
+                  </Row>
+                </Container>
+                {(this.state.curProject.plan && this.state.curProject.plan.length !== 0) && <PlanList plans={this.state.curProject.plan} curUser={this.props.curUser} />}
+                {this.state.curProject.plan && this.state.curProject.plan.length == 0 && (this.props.curUser === this.state.curProject.user._id) && <Button onClick={this.handleAddPlan}>Add Plans</Button>}
+              </Col>
+            </Row>
+          </Container>
+        </>}
+
+      </>
+    )
+  }
 }
 
 export default withRouter(Project);
