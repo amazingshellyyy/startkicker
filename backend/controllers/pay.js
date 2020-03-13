@@ -19,12 +19,19 @@ const createCustomer = async (req, res) => {
 
 
 const createPaymentIntent = async (req, res) => {
-  
- 
-  try {
+  const userId = req.body.metadata.userId;
+  const supportPj = req.body.metadata.project;
+  const selectPlan = req.body.metadata._id;
+  const updateUser = {
+    supportPj,
+    selectPlan
+  }
+  try{
+    const UpdatedUser = await db.User.findByIdAndUpdate(userId, updateUser, {new:true});
     const createdPaymentIntent = await stripe.paymentIntents.create(req.body);
     console.log(createPaymentIntent);
-    res.json(createdPaymentIntent);
+    // console.log(UpdatedUser);
+    res.json(createPaymentIntent);
   } catch (err) {
     console.log(err)
   }
