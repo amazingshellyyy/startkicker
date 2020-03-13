@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Row, Col, Card, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Card, Form, Button, InputGroup } from 'react-bootstrap';
 import { withRouter } from "react-router";
 import DatePicker from "react-day-picker";
 import axios from 'axios';
 import qs from 'query-string';
 
 const emptyState = {
-  title: '',
+  price: 0,
   subtitle: '',
   content: '',
   estDelivery: '',
@@ -98,11 +98,14 @@ class CardForm extends React.Component {
           <Card style={{ width: '40rem', minHeight: '20rem', margin:"10px" }}>
           <Card.Body>
           <Form >
-            <Form.Group>
-              <Form.Label className="text-muted" >Title</Form.Label>
-              <Form.Control  type="text" name="title" placeholder="Pledge $10 for this award" value={this.state.title} onChange={this.handleChange}>
+          <label className="text-muted" htmlFor="price">Price</label>
+            <InputGroup>
+              <InputGroup.Prepend>
+                <InputGroup.Text>US$</InputGroup.Text>
+              </InputGroup.Prepend>
+              <Form.Control  id='price' type="text" name="price" placeholder="price for this plan" value={this.state.price} onChange={this.handleChange}>
               </Form.Control>
-            </Form.Group>
+            </InputGroup>
             <Form.Group>
             <Form.Label className="text-muted" >Subtitle</Form.Label>
               <Form.Control size="sm" type="text" name="subtitle" placeholder="Subtitle" value={this.state.subtitle} onChange={this.handleChange}>

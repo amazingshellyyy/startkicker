@@ -20,12 +20,9 @@ const createCustomer = async (req, res) => {
 
 const createPaymentIntent = async (req, res) => {
   
-  const amount = req.body.amount
+ 
   try {
-    const createdPaymentIntent = await stripe.paymentIntents.create({
-      amount,
-      currency: "usd",
-    });
+    const createdPaymentIntent = await stripe.paymentIntents.create(req.body);
     console.log(createPaymentIntent);
     res.json(createdPaymentIntent);
   } catch (err) {

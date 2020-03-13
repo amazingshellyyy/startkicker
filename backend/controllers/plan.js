@@ -8,7 +8,7 @@ const create = async(req, res) => {
   console.log(plan);
   console.log(plan.project)
 
-  if (!plan.title || !plan.subtitle || !plan.content || !plan.estDelivery || !plan.project ) {
+  if (!plan.price || !plan.subtitle || !plan.content || !plan.estDelivery || !plan.project ) {
     return res.status(400).json({message: 'All filed is required'})
   }
   if (plan.price < 0 || plan.price == 0){

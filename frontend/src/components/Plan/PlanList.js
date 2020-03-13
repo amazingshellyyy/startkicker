@@ -36,7 +36,7 @@ class PlanList extends React.Component {
   displayPlans=plans => {
     console.log(this.props)
     return plans.map(plan => {
-      return <PlanCard key={plan._id} plan={plan} curUser={this.props.curUser} addPlan={this.addPlan.bind(this)} updateEditPlan={this.updateEditPlan.bind(this)}/>
+      return <PlanCard handleSelect={this.props.handleSelect} key={plan._id} plan={plan} curUser={this.props.curUser} addPlan={this.addPlan.bind(this)} updateEditPlan={this.updateEditPlan.bind(this)}/>
     })
   }
 addPlan(plan){
@@ -72,7 +72,10 @@ handleFinish = event => {
     return(
       <Container className="mt-5">
         <Row>
-           {(this.props.location.pathname[1]==="c")&&<Col><CardForm curUser={this.props.curUser} addPlan={this.addPlan.bind(this)} editPlan={this.state.editPlan}/></Col>}
+           {(this.props.location.pathname[1]==="c")&&
+           <Col>
+            <CardForm curUser={this.props.curUser} addPlan={this.addPlan.bind(this)} editPlan={this.state.editPlan}/>
+          </Col>}
           
           <Col>
           { this.state.isLoading? <div>You don't have any plans for this project yet</div>: this.displayPlans(this.state.plans) }
