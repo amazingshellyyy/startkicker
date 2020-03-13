@@ -41,7 +41,8 @@ class PlanCard extends React.Component {
       .then(res => {
         console.log(res.data)
         this.setState({
-          plan: {}
+          plan: {},
+          show: false
         })
       })
       .catch(err => {
@@ -55,7 +56,7 @@ class PlanCard extends React.Component {
 
   }
   handleModal = () => {
-    if (this.props.show) {
+    if (this.state.show) {
       this.setState({
         show: false
       })
@@ -92,7 +93,7 @@ class PlanCard extends React.Component {
                   </div>{(this.props.curUser === this.props.plan.user) && <>
                     <Button className="mr-2 mt-3" variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
                     <Button className="mr-2 mt-3" variant="outline-danger" onClick={this.handleModal}>Delete</Button>
-                    <Modal className="modal" show={this.props.show} onHide={this.handleModal}>
+                    <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
                       <Modal.Header closeButton>
                         <Modal.Title>Are you Sure?</Modal.Title>
                       </Modal.Header>

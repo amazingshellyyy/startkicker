@@ -41,6 +41,7 @@ const createPaymentIntent = async (req, res) => {
     console.log('UpdatedPlan2',UpdatedPlan )
     console.log(-(req.body.amount/100))
     const foundProject = await db.Project.findById(supportPj);
+    foundProject.backers.push(userId);
     foundProject.backersNum = foundProject.backersNum +1
     foundProject.balance = foundProject.balance+req.body.amount;
     await foundProject.save();

@@ -74,6 +74,32 @@ class Project extends React.Component {
   displayPercent = (balance,goal) => {
     return balance/goal*100
   }
+
+  displayButtons=()=>{
+    if(this.state.curProject.user && this.state.curProject.user._id === this.props.curUser){
+      return (<>
+      <Button className="mr-2 " variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
+      <Button className="m-2" variant="outline-danger" onClick={this.handleModal}>Delete</Button>
+      <Button className="m-2" variant="outline-primary" onClick={this.handleAddPlan}>Add more plans</Button>
+      <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Are you Sure?</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>You are trying to delete a project you owned, are you sure you want to delete?</Modal.Body>
+        <Modal.Footer>
+          <Button className="btn btn-danger" variant="primary" onClick={this.handleDelete}>Delete</Button>
+          <Button variant="secondary" onClick={this.handleModal}>Close</Button>
+          
+        </Modal.Footer>
+      </Modal>
+
+    </>)
+    } else if (this.state.curProject.backers.indexOf(this.props.curUser) === -1){
+      return <Button onClick={this.handleBacking}>Back the Project</Button>
+    } else {
+      return <Button disabled>You've already back this project</Button>
+    }
+  }
   
 
   render() {
@@ -108,23 +134,7 @@ class Project extends React.Component {
 
                         {/* <div>{this.state.curProject.user.username}</div> */}
                         <div className="mt-5">
-                          {(this.state.curProject.user && this.state.curProject.user._id === this.props.curUser) ? <>
-                            <Button className="mr-2 " variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
-                            <Button className="m-2" variant="outline-danger" onClick={this.handleModal}>Delete</Button>
-                            <Button className="m-2" variant="outline-primary" onClick={this.handleAddPlan}>Add more plans</Button>
-                            <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
-                              <Modal.Header closeButton>
-                                <Modal.Title>Are you Sure?</Modal.Title>
-                              </Modal.Header>
-                              <Modal.Body>You are trying to delete a project you owned, are you sure you want to delete?</Modal.Body>
-                              <Modal.Footer>
-                                <Button className="btn btn-danger" variant="primary" onClick={this.handleDelete}>Delete</Button>
-                                <Button variant="secondary" onClick={this.handleModal}>Close</Button>
-                                
-                              </Modal.Footer>
-                            </Modal>
-
-                          </> : <Button onClick={this.handleBacking}>Back the Project</Button>}</div>
+                          {this.displayButtons()}</div>
                       </Col>
 
 

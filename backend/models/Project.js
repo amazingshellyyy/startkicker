@@ -39,7 +39,11 @@ const ProjectSchema = mongoose.Schema({
   balance: {
     type: Number,
     default: 0
-  }
+  },
+  backers: [{
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }]
 });
 
 const Project = mongoose.model('Project', ProjectSchema);
