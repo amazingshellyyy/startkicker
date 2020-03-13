@@ -22,27 +22,30 @@ const createPaymentIntent = async (req, res) => {
   const userId = req.body.metadata.userId;
   const supportPj = req.body.metadata.project;
   const selectPlan = req.body.metadata._id;
-  const updateUser = {
-    supportPj,
-    selectPlan
-  }
+
   // console.log(supportPj)
   delete req.body.metadata.backers;
   console.log('after-backers')
   delete req.body.metadata.content;
-  console.log(req.body)
+  console.log('req.body',req.body)
 
   try{
-    const UpdatedPlan = await db.Plan.findById(selectPlan);
+    console.log('in try')
+    console.log('userId', userId)
+    console.log('supportPj', supportPj)
+    console.log('selectPlan', selectPlan)
+    const UpdatedPlan = await db.Plan.findOne({_id:selectPlan});
+    console.log('UpdatedPlan',UpdatedPlan )
     UpdatedPlan.backers.push(userId);
     await UpdatedPlan.save();
-    console.log('UpdatedPlan',UpdatedPlan )
+    console.log('UpdatedPlan2',UpdatedPlan )
     await db.Project.findByIdAndUpdate(supportPj,{$inc: {backersNum: 1,balance:-(req.body.amount/100)}},{new: true});
     const UpdatedUser = await db.User.findById(userId);
+    console.log('UpdatedUser',UpdatedUser)
     UpdatedUser.supportPj.push(supportPj);
     UpdatedUser.selectPlan.push(selectPlan);
     await UpdatedUser.save();
-    console.log('UpdatedUser',UpdatedUser)
+    console.log('UpdatedUser2',UpdatedUser)
     console.log('2')
     const createdPaymentIntent = await stripe.paymentIntents.create(req.body);
     // console.log(createPaymentIntent);
