@@ -1,8 +1,9 @@
 <h1 align="center">
 Startkicker
 </h1>
+<p align="center">
 Scope: A platform where user can browse different projects that others build and back the project. Users can also start a project and seek supports.
-
+</p>
 <p align="center">
 MongoDB, Expressjs, React, Nodejs
 </p>
