@@ -39,7 +39,7 @@ const signup = (req, res) => {
               errors: [{ message: 'access forbidden' }],
             });
             if (`${process.env.NODE_ENV}`=="prod") {
-              sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email', res, jwt, createdUser._id);
+              sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email', 'amazingshellyyy@gmail.com',res, jwt, createdUser._id);
             }else{
               res.status(200).json({ jwt , userId: createdUser._id});
             }
