@@ -26,18 +26,26 @@ const createPaymentIntent = async (req, res) => {
     supportPj,
     selectPlan
   }
-  console.log(supportPj)
+  // console.log(supportPj)
+  delete req.body.metadata.backers;
+  delete req.body.metadata.content;
+  console.log(req.body)
   try{
     const UpdatedPlan = await db.Plan.findById(selectPlan);
     UpdatedPlan.backers.push(userId);
     const savedPlan = await UpdatedPlan.save();
     const UpdatedProject = await db.Project.findByIdAndUpdate(supportPj,{$inc: {backersNum: 1}},{new: true});
-    const UpdatedUser = await db.User.findByIdAndUpdate(userId, updateUser, {new:true});
+    const UpdatedUser = await db.User.findById(userId);
+    UpdatedUser.supportPj.push(supportPj);
+    UpdatedUser.selectPlan.push(selectPlan);
+    const savedUser = await UpdatedUser.save();
+    
     const createdPaymentIntent = await stripe.paymentIntents.create(req.body);
     // console.log(createPaymentIntent);
     // console.log(UpdatedUser);
     res.status(200).json(createdPaymentIntent);
   } catch (err) {
+    console.log('intent')
     console.log(err)
   }
 };

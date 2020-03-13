@@ -10,8 +10,8 @@ const update = async(req, res) => {
 const show = async(req, res) => {
   console.log(req.params.id)
   try{
-    const foundUser = await db.User.findById(req.params.id).populate('ownPj')
-    console.log(foundUser)
+    const foundUser = await db.User.findById(req.params.id).populate('ownPj').populate('supportPj').populate('selectPlan').deepPopulate('selectPlan.project');
+    console.log(foundUser);
     res.status(200).json(foundUser)
 
   } catch (err){

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const deepPopulate = require('mongoose-deep-populate')(mongoose);
+
 
 const UserSchema = mongoose.Schema({
   username: {
@@ -32,7 +34,7 @@ const UserSchema = mongoose.Schema({
     ref: 'Plan'
   }]
 });
-
+UserSchema.plugin(deepPopulate);
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

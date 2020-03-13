@@ -22,7 +22,7 @@ class Navig extends React.Component{
           <NavLink className="nav-link" to='/'>Explore</NavLink>
             
           </Nav>
-          <Navbar.Brand href="#home" className="ml-auto mr-auto">Startkicker</Navbar.Brand>
+          <Navbar.Brand className="ml-auto mr-auto">Startkicker</Navbar.Brand>
           <Nav className="ml-auto">
           {/* <Form inline className="mr-sm-2">
             <FormControl type="text" placeholder="Search" className="mr-sm-2" />

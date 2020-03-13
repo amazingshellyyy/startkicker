@@ -29,7 +29,7 @@ class Profile extends React.Component {
 
   displayProject=projects=> {
     return projects.map(project => {
-      return <ProjectCard project={project}/>
+      return <ProjectCard key={project._id} project={project} selectPlan={this.state.user.selectPlan}/>
     })
   }
 
@@ -72,7 +72,7 @@ class Profile extends React.Component {
             <Col></Col>
             <Col><small className="text-muted">Project I support(selectPlan)</small>
               <Card style={{ width: '60vw' }}>
-                {(this.state.user&& this.state.user.ownPj) &&this.displayProject(this.state.user.ownPj)}
+                {(this.state.user&& this.state.user.supportPj) &&this.displayProject(this.state.user.supportPj)}
               </Card>
             </Col>
             <Col></Col>

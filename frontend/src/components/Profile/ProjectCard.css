@@ -2,3 +2,8 @@
   background-color: antiquewhite;
   cursor: pointer;
 }
+
+.pj-image{
+  width:100%;
+  height:auto;
+}
