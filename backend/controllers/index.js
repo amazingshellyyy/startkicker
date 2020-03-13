@@ -3,5 +3,6 @@ module.exports = {
   pay: require('./pay'),
   project: require('./project'),
   plan: require('./plan'),
+  user: require('./user'),
  
 };
