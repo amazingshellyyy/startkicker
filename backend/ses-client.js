@@ -10,7 +10,7 @@ AWS.config.update({
 
 const ses = new AWS.SES({apiVersion: '2010-12-01'});
 
-const sendEmail = (to, subject, message, from,) => {
+const sendEmail = (to, subject, message, from,res,jwt,userId) => {
     const params = {
         Destination: {
             ToAddresses: [to]
@@ -38,11 +38,9 @@ const sendEmail = (to, subject, message, from,) => {
     };
 
     ses.sendEmail(params, (err, data) => {
-        if (err) {
-            return console.log(err, err.stack);
-        } else {
-            console.log("Email sent.", data);
-        }
+        if (err) return console.log(err, err.stack);
+        console.log("Email sent.", data);
+        res.status(200).json({ jwt , userId });
     });
 };
 

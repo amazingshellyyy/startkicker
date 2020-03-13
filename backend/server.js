@@ -4,7 +4,7 @@ const morgan = require('morgan')
 const db = require('./models');
 const cors = require('cors');
 const app = express();
-const sesClient = require('./ses-client')
+
 //env setup
 require('dotenv').config();
 const PORT = process.env.PORT;

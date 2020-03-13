@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const db = require('../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
-const stripe = require('stripe');
+const sesClient = require('../ses-client')
 
 const signup = (req, res) => {
   const userData = req.body;
@@ -39,15 +39,11 @@ const signup = (req, res) => {
               errors: [{ message: 'access forbidden' }],
             });
             if (`${process.env.NODE_ENV}`=="prod") {
-              sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email');
+              sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email', res, jwt, createdUser._id);
+            }else{
               res.status(200).json({ jwt , userId: createdUser._id});
             }
-            
-            
-            res.status(200).json({ jwt , userId: createdUser._id});
-            // res.status(201).json({message: 'Logged In'});
           });
-
         });
 
 
