@@ -3,7 +3,7 @@ const db = require('../models');
 const create = async(req, res) => {
   
   const user = req.curUserId;
-  const project = {...req.body, user};
+  const project = {...req.body, user, balance:req.body.goal};
   console.log(project);
 
   if (!project.title || !project.content || !project.endDate) {

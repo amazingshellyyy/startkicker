@@ -35,6 +35,9 @@ const ProjectSchema = mongoose.Schema({
   },
   image: {
     type: String
+  },
+  balance: {
+    type: Number
   }
 });
 
