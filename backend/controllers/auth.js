@@ -40,6 +40,7 @@ const signup = (req, res) => {
             });
             if (`${process.env.NODE_ENV}`=="prod") {
               sesClient.sendEmail(`${createdUser.email}`, 'Hey!Welcome to startkisker', 'this is a testtttt email');
+              res.status(200).json({ jwt , userId: createdUser._id});
             }
             
             
