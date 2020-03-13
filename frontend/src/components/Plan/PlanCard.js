@@ -88,11 +88,10 @@ class PlanCard extends React.Component {
                     <Card.Text>{moment(this.props.plan.estDelivery).format('LL')}</Card.Text>
                   </div>
                   <div>
-                    
                     <small className="text-muted">{this.props.plan.backers && this.props.plan.backers.length} bakers</small>
                   </div>{(this.props.curUser === this.props.plan.user) && <>
-                    <Button variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
-                    <Button variant="outline-danger" onClick={this.handleModal}>Delete</Button>
+                    <Button className="mr-2 mt-3" variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
+                    <Button className="mr-2 mt-3" variant="outline-danger" onClick={this.handleModal}>Delete</Button>
                     <Modal className="modal" show={this.props.show} onHide={this.handleModal}>
                       <Modal.Header closeButton>
                         <Modal.Title>Are you Sure?</Modal.Title>

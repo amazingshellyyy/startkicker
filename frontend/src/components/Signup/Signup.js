@@ -49,30 +49,29 @@ class Signup extends React.Component {
      
         <Container className="mt-5 pt-5" style={{minHeight:'75vh'}}>
           <Row>
-            <Col></Col>
-            <Col className="text-center">
-              <h3 className="p-2">Signup</h3>
+            <Col xs={1} md={4}></Col>
+            <Col xs={10} md={4} className="text-center">
+              <h3 className="p-2">Join now!</h3>
               <Form className="text-left" onSubmit={this.handleSubmit}>
               <Form.Group controlId="formBasicUsername">
-                  <Form.Control type="text" name="username" placeholder="Enter username" onChange={this.handleChange}/>
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
+                  <Form.Control type="text" name="username" placeholder="Username" onChange={this.handleChange}/>
+                  
                 </Form.Group>
                 <Form.Group controlId="formBasicEmail">
-                  <Form.Control type="email" name="email" placeholder="Enter email" onChange={this.handleChange}/>
+                  <Form.Control type="email" name="email" placeholder="Email" onChange={this.handleChange}/>
                   <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
+                    you will use this email to login
                   </Form.Text>
                 </Form.Group>
                 <Form.Group controlId="formBasicPassword">
                   <Form.Control type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
                 </Form.Group>
-                <Button className="" variant="primary" type="submit" >
-                  Submit
+                <hr className="mt-4"></hr>
+                <Button className="mt-4 btn-block" variant="outline-primary" type="submit" >
+                  Sign up
                 </Button>
               </Form></Col>
-            <Col></Col>
+            <Col xs={1} md={4}></Col>
   
           </Row>
         </Container>

@@ -36,12 +36,12 @@ class Landing extends React.Component {
          
             <p className="lead">
               <Link to='/create/project'>
-              <div className="btn btn-primary btn-lg"  role="button">Create NOW</div>
+              <div className="btn btn-primary btn-lg"  role="button">Start a project</div>
               </Link>
             </p>
             </Container>
         </div>
-        <Container>
+        <Container style={{minHeight: "70vh"}}>
           <h3>Explore Projects Here </h3>
           {this.displayProject(this.state.projects)}
         </Container>

@@ -109,9 +109,9 @@ class Project extends React.Component {
                         {/* <div>{this.state.curProject.user.username}</div> */}
                         <div className="mt-5">
                           {(this.state.curProject.user && this.state.curProject.user._id === this.props.curUser) ? <>
-                            <Button onClick={this.handleEdit}>Edit</Button>
-                            <Button onClick={this.handleModal}>Delete</Button>
-                            <Button onClick={this.handleAddPlan}>Add more plans</Button>
+                            <Button className="mr-2 " variant="outline-dark" onClick={this.handleEdit}>Edit</Button>
+                            <Button className="m-2" variant="outline-danger" onClick={this.handleModal}>Delete</Button>
+                            <Button className="m-2" variant="outline-primary" onClick={this.handleAddPlan}>Add more plans</Button>
                             <Modal className="modal" show={this.state.show} onHide={this.handleModal}>
                               <Modal.Header closeButton>
                                 <Modal.Title>Are you Sure?</Modal.Title>
