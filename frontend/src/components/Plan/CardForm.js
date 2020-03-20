@@ -74,7 +74,8 @@ class CardForm extends React.Component {
     axios.put(`${process.env.REACT_APP_API_URL}/plan/${this.state._id}`,this.state)
       .then(res => {
         console.log('edit is save',res.data)
-        window.location = this.props.location.pathname
+        this.setState({...emptyState})
+        window.location = `http://localhost:3000/create/project/${res.data.project}/plan`;
       })
       .catch(err => {
         console.log(err.response)
