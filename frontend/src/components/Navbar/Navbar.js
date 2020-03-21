@@ -18,7 +18,7 @@ class Navig extends React.Component{
           <Nav className="mr-auto">
           
           <NavLink className="nav-link" to='/create/project'>Start a project</NavLink>
-          <NavLink className="nav-link" to='/'>Explore</NavLink>
+          <NavLink className="nav-link" to='/explore'>Explore</NavLink>
             
           </Nav>
           <NavLink to="/">

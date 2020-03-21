@@ -1,0 +1,34 @@
+.jumbotron {
+  background-color: #ffffff;
+}
+
+
+
+.btn-default {
+  /* background-color: #00FFA0; */
+  color:#000;
+  border-color: #00DB8A; 
+}
+ 
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+  background-color: #00DB8A;
+  color:#FFF;
+  border-color: #00BF79;
+}
+
+
+
+.mission {
+  background-color: #F7F7F7;
+}
+
+
+.concept {
+  height:100px;
+}
+
+.content {
+  font-size: 0.8rem;
+  max-width: 65vw;
+  margin:0 auto;
+}

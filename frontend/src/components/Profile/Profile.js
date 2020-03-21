@@ -77,7 +77,7 @@ class Profile extends React.Component {
             <Col xs={10}><small className="text-muted">Project I support(selectPlan)</small>
               <Card >
                 {(this.state.user&& this.state.user.supportPj) &&this.displayProject(this.state.user.supportPj)}
-                {(this.state.user.supportPj && this.state.user.supportPj.length == 0) && <Link to='/'><div className="btn btn-primary m-5">Explore Projects now</div></Link>}
+                {(this.state.user.supportPj && this.state.user.supportPj.length == 0) && <Link to='/'><div className="btn btn-default m-5">Explore Projects now</div></Link>}
               </Card>
             </Col>
             <Col xs={1}></Col>

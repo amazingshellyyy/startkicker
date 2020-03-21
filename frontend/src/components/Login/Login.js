@@ -37,8 +37,8 @@ class Login extends React.Component {
     return (
       <>
      
-        <Container className="mt-5 pt-5" style={{minHeight:'75vh'}}>
-          <Row>
+        <Container className="mt-5 pt-5" style={{minHeight:'80vh'}}>
+          <Row className="">
             <Col xs={1} md={4}></Col>
             <Col xs={10} md={4} className="text-center">
               <h3 className="p-2">Welcome Back</h3>
@@ -50,7 +50,7 @@ class Login extends React.Component {
                   <Form.Control type="password" name="password" placeholder="Password" onChange={this.handleChange}/>
                 </Form.Group>
                 <hr className="mt-4"></hr>
-                <Button className="mt-4 btn-block" variant="outline-primary" type="submit">
+                <Button className="btn btn-default mt-4 btn-block" variant="default" type="submit">
                   Login
                 </Button>
               </Form></Col>

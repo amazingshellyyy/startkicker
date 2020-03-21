@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import {Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import Naviga from './components/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './config/routes';
@@ -13,26 +13,26 @@ class App extends Component {
     curUser: '',
   }
 
-  componentDidMount (){
+  componentDidMount() {
     let token = localStorage.getItem('jwt');
-    if (token){
+    if (token) {
       let userId = jwt.decode(token).foo
       this.setCurrentUser(token, userId)
     }
-   
+
   }
-  
-  setCurrentUser = (jwt,userId) => {
+
+  setCurrentUser = (jwt, userId) => {
     console.log('get jwt and set user');
     if (jwt) {
       this.setState({
         isLogin: true,
-        curUser:  userId
+        curUser: userId
       })
       localStorage.setItem('jwt', jwt);
     }
   }
-  handleLogout (){
+  handleLogout() {
     localStorage.removeItem('jwt');
     this.setState({
       isLogin: false,
@@ -40,26 +40,26 @@ class App extends Component {
     })
 
   }
- 
 
- 
-render(){
 
-  return (
-    <>
-      <Naviga isLogin={this.state.isLogin} curUser={this.state.curUser} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout.bind(this)}/>
-     
-      
-      <Routes isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout} curUser={this.state.curUser}/>
-      <div className="jumbotron mb-0 mt-5 pt-0">
+
+  render() {
+
+    return (
+      <>
+        <Naviga isLogin={this.state.isLogin} curUser={this.state.curUser} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout.bind(this)} />
+
+
+        <Routes isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout} curUser={this.state.curUser} />
+        <div className="footer">
           <Container>
-          <p className="pt-5 lead text-center">Startkicker, INC © 2020</p>       
-            </Container>
+            <p className="p-0 m-0">Startkicker, INC © 2020</p>
+          </Container>
         </div>
-        
-    </>
-  );
-}
+
+      </>
+    );
+  }
 }
 
 export default withRouter(App);

@@ -42,3 +42,24 @@ body{
     transform: rotate(360deg);
   }
 }
+
+
+.footer {
+  background-color: #00FFA0;
+  font-size: 0.8rem;
+  padding: .8rem;
+  text-align: center;
+}
+
+
+.btn-default {
+  /* background-color: #00FFA0; */
+  color:#000;
+  border-color: #00DB8A; 
+}
+ 
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default {
+  background-color: #00DB8A;
+  color:#FFF;
+  border-color: #00BF79;
+}

@@ -11,10 +11,12 @@ import LoggedInRequired from '../components/Wrapper/checkIfUserIsLoggedIn';
 import PlanList from '../components/Plan/PlanList';
 import Profile from '../components/Profile/Profile';
 import Checkout from '../components/Checkout/Checkout';
+import ProjectList from '../components/ProjectList/ProjectList'
 
 export default ({ isLogin, curUser, setCurrentUser }) => (
   <Switch>
     <Route exact path='/' component={Landing} />
+    <Route path='/explore' component={ProjectList} />
     <Route path='/signup' render={() => (<Signup isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)} />
     <Route
       path='/login' render={() => (<Login isLogin={isLogin} curUser={curUser} setCurrentUser={setCurrentUser}/>)}/>
