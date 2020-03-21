@@ -11,7 +11,6 @@ class Checkout extends React.Component {
   }
 
   handleSelect=(planId)=> {
-    console.log('incheckout',planId)
     this.setState({
       seletedId: planId,
       
@@ -20,7 +19,6 @@ class Checkout extends React.Component {
       pathname:this.props.location.pathname.concat(`/${planId}`),
       
     })
-    console.log('statein checkout',this.state)
 
   }
   render(){

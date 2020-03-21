@@ -47,17 +47,17 @@ class Landing extends React.Component {
           <Container>
             <Row className="pt-5">
               <Col sm lg={4} className="text-center mb-5">
-                <img className="concept mb-3" src="/idea.svg" />
+                <img className="concept mb-3" src="./idea.svg" />
                 <p>Make your ideas come true</p>
                 <p className="text-muted content">with StartKicker, your ideas can be visualize and become reality.</p>
               </Col>
               <Col sm lg={4} className="text-center mb-5">
-                <img className="concept mb-3" src="/invest.svg" />
+                <img className="concept mb-3" src="./invest.svg" />
                 <p>Get support on your dream</p>
                 <p className="text-muted content">with StartKicker, your ideas can be visualize and become reality.</p>
               </Col>
               <Col sm lg={4} className="text-center mb-5">
-                <img className="concept mb-3" src="/launch.svg" />
+                <img className="concept mb-3" src=".ç/launch.svg" />
                 <p>Launch your project and grow big!</p>
                 <p className="text-muted content">with StartKicker, your ideas can be visualize and become reality.</p>
               </Col>

@@ -23,7 +23,6 @@ class App extends Component {
   }
 
   setCurrentUser = (jwt, userId) => {
-    console.log('get jwt and set user');
     if (jwt) {
       this.setState({
         isLogin: true,

@@ -22,22 +22,20 @@ class CheckoutForm extends React.Component {
     const planId = this.props.match.params.planId
     axios.get(`${process.env.REACT_APP_API_URL}/plan/${planId}`)
       .then(res => {
-        console.log('GET plan', res.data)
         this.setState({
           curPlan: res.data,
           amount: (res.data.price) * 100
         })
       })
       .catch(err => {
-        console.log(err)
+        process.env.MODE=='dev'&&console.log(err);
+        // process.env.MODE=='production'&&
       })
-    console.log(this.state)
   }
 
   getcurUser(curUser) {
     axios.get(`${process.env.REACT_APP_API_URL}/user/${curUser}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           curUser: res.data
         })
