@@ -57,7 +57,7 @@ class Landing extends React.Component {
                 <p className="text-muted content">with StartKicker, your ideas can be visualize and become reality.</p>
               </Col>
               <Col sm lg={4} className="text-center mb-5">
-                <img className="concept mb-3" src=".ç/launch.svg" />
+                <img className="concept mb-3" src="./launch.svg" />
                 <p>Launch your project and grow big!</p>
                 <p className="text-muted content">with StartKicker, your ideas can be visualize and become reality.</p>
               </Col>
