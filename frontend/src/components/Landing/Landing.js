@@ -12,7 +12,6 @@ class Landing extends React.Component {
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_API_URL}/project/all`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           projects: res.data
         })

@@ -18,7 +18,6 @@ class Profile extends React.Component {
   componentDidMount() {
     axios.get(`${process.env.REACT_APP_API_URL}/user/${this.props.match.params.userId}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           user: res.data
         })

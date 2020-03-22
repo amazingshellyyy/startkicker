@@ -29,7 +29,6 @@ class CheckoutForm extends React.Component {
       })
       .catch(err => {
         process.env.MODE=='dev'&&console.log(err);
-        // process.env.MODE=='production'&&
       })
   }
 
@@ -46,34 +45,16 @@ class CheckoutForm extends React.Component {
   }
 
   handleSubmit = async (event) => {
-    // We don't want to let default form submission happen here,
-    // which would refresh the page.
     event.preventDefault();
-    // this.getcurUser(this.props.curUser)
-    console.log(this.props.curUser)
-    //email,name
-    // const customer = {
-    //   email: this.state.curUser.email,
-    //   name: this.state.curUser.username
-    // }
-    // console.log(customer)
-    // axios.post(`${process.env.REACT_APP_API_URL}/pay/createCustomer`, customer)
 
     const userId = this.props.curUser;
-    // console.log(userId)
-    // console.log(this.state)
-    // console.log(this.state.curPlan)
-    // amount,currency,customer,metadata
     const objectToSend = {
       amount: this.state.amount,
       currency: "usd",
       metadata: { ...this.state.curPlan, userId }
     }
-    console.log("objectToSend", objectToSend);
-    //a request to api route first to get the client secret
     axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend)
       .then(res => {
-        console.log(res.data);
 
         this.handlePayment(res.data.client_secret)
       })
@@ -86,8 +67,6 @@ class CheckoutForm extends React.Component {
     const { stripe, elements } = this.props
 
     if (!stripe || !elements) {
-      // Stripe.js has not yet loaded.
-      // Make  sure to disable form submission until Stripe.js has loaded.
       return;
     }
     const result = await stripe.confirmCardPayment(client_secret, {
@@ -97,21 +76,13 @@ class CheckoutForm extends React.Component {
     });
 
     if (result.error) {
-      // Show error to your customer (e.g., insufficient funds)
       console.log(result.error.message);
     } else {
-      // The payment has been processed!
       if (result.paymentIntent.status === 'succeeded') {
-        console.log('payment success');
         this.setState({
           display: "",
           display2: "none"
         })
-        // Show a success message to your customer
-        // There's a risk of the customer closing the window before callback
-        // execution. Set up a webhook or plugin to listen for the
-        // payment_intent.succeeded event that handles any business critical
-        // post-payment actions.
       }
     }
   }

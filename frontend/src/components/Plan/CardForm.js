@@ -28,16 +28,13 @@ class CardForm extends React.Component {
 
   handleDayClick(day, { selected, disabled }) {
     if (disabled) {
-      // Day is disabled, do nothing
       return;
     }
     if (selected) {
-      // Unselect the day if already selected
       this.setState({ estDelivery: undefined });
       return;
     }
     this.setState({ estDelivery: day });
-    console.log(this.state.estDelivery)
   }
   handleChange = event => {
     this.setState({
@@ -46,8 +43,6 @@ class CardForm extends React.Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('nextProps', nextProps)
-    console.log('prevState', prevState)
     if(nextProps.editPlan._id !== prevState._id){
       return {
         ...nextProps.editPlan
@@ -57,11 +52,9 @@ class CardForm extends React.Component {
 
   handleAddPlan= event=>{
     event.preventDefault();
-    console.log('projectId',this.props.match.params.projectId)
-    console.log('UserId',this.props.curUser)
     axios.post(`${process.env.REACT_APP_API_URL}/plan/create`, {...this.state, project:this.props.match.params.projectId, user:this.props.curUser},{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
       .then(res => {
-        console.log(res.data)
+
         this.props.addPlan(res.data)
         this.setState({...emptyState})
       })
@@ -73,7 +66,7 @@ class CardForm extends React.Component {
     event.preventDefault();
     axios.put(`${process.env.REACT_APP_API_URL}/plan/${this.state._id}`,this.state)
       .then(res => {
-        console.log('edit is save',res.data)
+
         this.setState({...emptyState})
         window.location = `http://localhost:3000/create/project/${res.data.project}/plan`;
       })

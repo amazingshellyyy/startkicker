@@ -13,14 +13,8 @@ class ProjectCard extends React.Component {
     this.props.history.push(`/project/${this.props.project._id}`)
   }
   handlePrice = plans => {
-    console.log(plans);
-    console.log(this.props.project._id)
     let amount = 0;
     plans.forEach(plan => {
-      console.log('plan',plan)
-      console.log('plan.project._id',plan.project._id)
-      console.log(this.props.project._id)
-      console.log(plan.price)
       if (plan.project._id === this.props.project._id) {
         amount = plan.price
       } 

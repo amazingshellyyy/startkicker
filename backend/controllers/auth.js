@@ -87,7 +87,6 @@ const login = (req, res) => {
             errors: [{ message: 'access forbidden' }],
           });
           res.status(200).json({ jwt , userId: foundUser._id});
-          // res.status(201).json({message: 'Logged In'});
         });
       } else {
         return res.json({

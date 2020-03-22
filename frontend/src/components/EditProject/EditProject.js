@@ -20,7 +20,6 @@ class EditProject extends React.Component {
     event.preventDefault();
     axios.put(`${process.env.REACT_APP_API_URL}/project/${projectId}`, this.state.editProject,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}} )
       .then(res => {
-        console.log(res.data)
         this.props.history.push(`/project/${res.data._id}`)
       })
       .catch (err => {
@@ -33,19 +32,13 @@ class EditProject extends React.Component {
         [event.target.name]: event.target.value
       }
     })
-    console.log('title', this.state.editProject.title)
-    console.log('content', this.state.editProject.content)
-    console.log('goal', this.state.editProject.goal) 
-    console.log('goal', this.state.editProject.endDate) 
   }
   componentDidMount(){
     
     const projectId = this.props.match.params.projectId;
-    console.log(projectId);
     
     axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
       .then(res => {
-        console.log(res.data)
         const endDate = new Date(res.data.endDate);
         if (res.data.user._id !== this.props.curUser) {
           this.props.history.push(`/project/${projectId}`)
@@ -72,7 +65,6 @@ class EditProject extends React.Component {
     }
     this.setState({ 
       editProject: {...this.state.editProject, endDate: day} });
-    console.log(this.state.editProject.endDate)
   }
   convertStringtoDate = (time)=>{
     const date = new Date(time);

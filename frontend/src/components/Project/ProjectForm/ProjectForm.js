@@ -22,19 +22,11 @@ class ProjectForm extends React.Component {
       image:''
     }
   }
-  // componentDidMount(){
-  //   const jwt = localStorage.getItem('jwt');
-  //   if(!jwt){
-  //     this.props.history.push('/login')
-  //   }
-  // }
+
   handleSubmit = event => {
     event.preventDefault();
-    console.log('create a project')
-    console.log(this.state)
     axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
-        console.log(res.data)
         this.setState({
           show: true,
           projectId: res.data._id
@@ -49,25 +41,19 @@ class ProjectForm extends React.Component {
   }
   handleDayClick(day, { selected, disabled }) {
     if (disabled) {
-      // Day is disabled, do nothing
       return;
     }
     if (selected) {
-      // Unselect the day if already selected
       this.setState({ endDate: undefined });
       return;
     }
     this.setState({ endDate: day });
-    console.log(this.state.endDate)
   }
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log('title', this.state.title)
-    console.log('content', this.state.content)
-    console.log('goal', this.state.goal)
   }
   handleNext = event => {
     event.preventDefault();

@@ -25,7 +25,6 @@ app.use(bodyParser.json());
 
 //-----Routes----//
 app.get('/', (req, res) => {
-  // sesClient.sendEmail('amazingshellyyy@gmail.com', 'Hey!Welcome to startkisker', 'this is a test email');
   res.send('Hello world')
 })
 

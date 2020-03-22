@@ -9,7 +9,6 @@ import qs from 'query-string';
 class PlanList extends React.Component {
   constructor (props){
     super(props)
-    console.log(this.props.plans)
     this.state = {
       plans: this.props.plans,
       isLoading: true,
@@ -23,7 +22,6 @@ class PlanList extends React.Component {
     const projectId = this.props.match.params.projectId
     axios.get(`${process.env.REACT_APP_API_URL}/plan/all/${projectId}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           plans: res.data,
           isLoading: false
@@ -34,7 +32,6 @@ class PlanList extends React.Component {
       })
   }
   displayPlans=plans => {
-    console.log(this.props)
     return plans.map(plan => {
       return <PlanCard handleSelect={this.props.handleSelect} key={plan._id} plan={plan} curUser={this.props.curUser} addPlan={this.addPlan.bind(this)} updateEditPlan={this.updateEditPlan.bind(this)}/>
     })
@@ -51,7 +48,6 @@ updateEditPlan= (id) => {
   
   axios.get(`${process.env.REACT_APP_API_URL}/plan/${id}`)
     .then(res => {
-      // console.log(res.data)
       this.setState({
         editPlan: res.data
       })

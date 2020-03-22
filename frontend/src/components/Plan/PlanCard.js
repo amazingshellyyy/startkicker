@@ -39,7 +39,6 @@ class PlanCard extends React.Component {
     event.preventDefault();
     axios.delete(`${process.env.REACT_APP_API_URL}/plan/${this.props.plan._id}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           plan: {},
           show: false
@@ -50,8 +49,6 @@ class PlanCard extends React.Component {
       })
   }
   handleClick = () => {
-    // event.preventDefault();
-    console.log(this.props.plan._id)
     this.props.handleSelect(this.props.plan._id)
 
   }

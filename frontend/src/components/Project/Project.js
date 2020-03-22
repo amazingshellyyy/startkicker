@@ -16,32 +16,26 @@ class Project extends React.Component {
   componentDidMount() {
 
     const projectId = this.props.match.params.projectId;
-    console.log(projectId);
     axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           curProject: res.data
         })
       })
       .catch(err => {
-        console.log(err.response)
         this.props.history.push('/');
       })
   }
 
   handleEdit = event => {
     event.preventDefault();
-    console.log('edit')
     this.props.history.push(`/project/${this.props.match.params.projectId}/edit`)
   }
   handleDelete = event => {
     event.preventDefault();
-    console.log('delete')
     const projectId = this.props.match.params.projectId;
     axios.delete(`${process.env.REACT_APP_API_URL}/project/${projectId}`, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
       .then(res => {
-        console.log(res.data)
         this.props.history.push('/');
       })
       .catch(err => {

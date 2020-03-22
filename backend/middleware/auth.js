@@ -16,9 +16,7 @@ const verify = (req, res, next) => {
       next();
     })
   } else {
-    //If header is undefined return Forbidden (403)
     res.status(403).json({status: 400, errors: [{message: 'There is something wrong with the token, please refer to the readme'}]})
-    // res.redirect('http://localhost:4000/login');
   }
 
 

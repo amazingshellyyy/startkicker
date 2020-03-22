@@ -13,15 +13,12 @@ class Login extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log(this.state.email)
-    console.log(this.state.password)
   }
 
   handleSubmit = event => {
     event.preventDefault();
     axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, this.state)
       .then(res => {
-        console.log(res.data.jwt)
         let jwt = res.data.jwt;
         this.props.setCurrentUser(jwt, res.data.userId);
         this.props.history.push( `/profile/${res.data.userId}`);

@@ -20,7 +20,6 @@ class Payment extends Component {
   componentDidMount(){
     axios.get(`${process.env.REACT_APP_API_URL}/plan/${this.props.match.params.planId}`)
       .then(res => {
-        console.log(res.data)
         this.setState({
           curPlan: res.data
         })

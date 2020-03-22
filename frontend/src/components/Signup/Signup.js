@@ -15,25 +15,12 @@ class Signup extends React.Component {
     this.setState({
       [event.target.name]: event.target.value
     })
-    console.log('username',this.state.username)
-    console.log('email',this.state.email)
-    console.log('password',this.state.password)
   }
   handleSubmit = event => {
     event.preventDefault();
-    console.log('hiiii')
-    console.log('bodytosend',this.state);
-    // axios.post(`${process.env.REACT_APP_API_URL}/pay/createCustomer`,{email: this.state.email, username: this.state.username})
-    //   .then(res => {
-    //     console.log(res.data)
-    //   })
-    //   .catch(err => {
-    //     console.log(err.response)
-    //   })
 
     axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, this.state)
       .then(res => {
-        console.log(res.data.jwt)
         let jwt = res.data.jwt
         this.props.setCurrentUser(jwt, res.data.userId);
         this.props.history.push('/');
