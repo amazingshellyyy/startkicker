@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Container } from 'react-bootstrap';
+
 import Naviga from './components/Navbar/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './config/routes';
