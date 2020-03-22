@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './config/routes';
 import { withRouter } from "react-router";
 import jwt from 'jsonwebtoken';
+import Footer from './components/Footer/Footer'
 
 class App extends Component {
   state = {
@@ -50,11 +51,7 @@ class App extends Component {
 
 
         <Routes isLogin={this.state.isLogin} setCurrentUser={this.setCurrentUser} handleLogout={this.handleLogout} curUser={this.state.curUser} />
-        <div className="footer">
-          <Container>
-            <p className="p-0 m-0">Startkicker, INC © 2020</p>
-          </Container>
-        </div>
+        <Footer/>
 
       </>
     );

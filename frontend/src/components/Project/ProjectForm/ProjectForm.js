@@ -78,7 +78,7 @@ class ProjectForm extends React.Component {
     return (
       <>
 
-        <Container className="mt-5 mb-5 pb-5 pt-3" style={{minHeight:"75vh"}}>
+        <Container className="mt-5 mb-5 pb-5 pt-3" style={{minHeight:"86vh"}}>
           <Row>
             <Col></Col>
             <Col className="text-center">

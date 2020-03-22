@@ -37,7 +37,7 @@ class Profile extends React.Component {
   render() {
     return (
       <>
-      <div style={{minHeight:"75vh"}}>
+      <div style={{minHeight:"86vh"}}>
         <Container className="mt-5">
           <Row>
             <Col xs={1}></Col>
@@ -71,7 +71,7 @@ class Profile extends React.Component {
             <Col xs={1}></Col>
           </Row>
         </Container>
-        <Container className="mt-3">
+        <Container className="mt-3 mb-3">
           <Row>
             <Col xs={1}></Col>
             <Col xs={10}><small className="text-muted">Project I support(selectPlan)</small>

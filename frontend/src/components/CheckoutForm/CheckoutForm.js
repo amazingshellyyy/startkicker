@@ -124,7 +124,7 @@ class CheckoutForm extends React.Component {
     return (
       <>
         {/* <Container style={{ height: "80vh" }}> */}
-          <Row className="mt-5" style={{ minHeight: "75vh" }}>
+          <Row className="mt-5" >
             
             <Col>
             <form onSubmit={this.handleSubmit.bind(this)}>

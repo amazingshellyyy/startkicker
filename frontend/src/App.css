@@ -2,6 +2,9 @@
 
 body{
   font-family: 'Raleway', sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing: border-box;
 }
 .App {
   text-align: center;
@@ -43,13 +46,6 @@ body{
   }
 }
 
-
-.footer {
-  background-color: #00FFA0;
-  font-size: 0.8rem;
-  padding: .8rem;
-  text-align: center;
-}
 
 
 .btn-default {
