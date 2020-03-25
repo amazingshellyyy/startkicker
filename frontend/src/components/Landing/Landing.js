@@ -39,7 +39,7 @@ class Landing extends React.Component {
                 <div className="btn btn-default" role="button">Start a project</div>
               </Link>
             </p>
-            <small style={{fontSize:".7rem"}} className="text-muted">This is a kickstarter-clone project run by amazingshellyyy. you can see my repo <a href="">here</a></small>
+            <small style={{fontSize:".7rem"}} className="text-muted">This is a kickstarter-clone project run by amazingshellyyy. you can see my repo <a href="https://github.com/amazingshellyyy/startkicker">here</a></small>
           </Container>
         </div>
         <div className="mission pt-5 pb-5">
