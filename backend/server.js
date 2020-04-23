@@ -14,7 +14,7 @@ const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
 //-----Middleware---//
 const coresOptions = {
-  origin: ['http://localhost:3000', 'http://amazingshellyyy.com','https://amazingshellyyy.com', 'http://amazingshelly.github.com'],
+  origin: ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com'],
   credentials: true,
   optionsSuccessStatus: 200
 }

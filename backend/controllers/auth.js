@@ -14,7 +14,7 @@ const signup = (req, res) => {
 
   //check for existing user account
   db.User.findOne({ email: userData.email }, (err, foundUser) => {
-    if (err) return res.status(400).json({ message: 'Bad request, tyr again' });
+    if (err) return res.status(400).json({ message: 'Bad request, try again' });
 
     //return error if account alraedy exist
     if (foundUser) return res.status(400).json({ message: 'Email is already been registered, please try again' });
