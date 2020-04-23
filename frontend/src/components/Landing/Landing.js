@@ -10,7 +10,7 @@ class Landing extends React.Component {
     projects: []
   }
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/project/all`)
+    axios.get(`${process.env.REACT_APP_API_URL}/project/all`,{headers: {'Access-Control-Allow-Origin': '*'})
       .then(res => {
         this.setState({
           projects: res.data

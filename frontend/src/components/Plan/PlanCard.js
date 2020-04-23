@@ -37,7 +37,7 @@ class PlanCard extends React.Component {
 
   handleDelete = event => {
     event.preventDefault();
-    axios.delete(`${process.env.REACT_APP_API_URL}/plan/${this.props.plan._id}`)
+    axios.delete(`${process.env.REACT_APP_API_URL}/plan/${this.props.plan._id}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           plan: {},

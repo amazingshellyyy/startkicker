@@ -52,7 +52,7 @@ class CardForm extends React.Component {
 
   handleAddPlan= event=>{
     event.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_URL}/plan/create`, {...this.state, project:this.props.match.params.projectId, user:this.props.curUser},{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
+    axios.post(`${process.env.REACT_APP_API_URL}/plan/create`, {...this.state, project:this.props.match.params.projectId, user:this.props.curUser},{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`,'Access-Control-Allow-Origin': '*'}})
       .then(res => {
 
         this.props.addPlan(res.data)
@@ -64,7 +64,7 @@ class CardForm extends React.Component {
   }
   handleEditPlan = event => {
     event.preventDefault();
-    axios.put(`${process.env.REACT_APP_API_URL}/plan/${this.state._id}`,this.state)
+    axios.put(`${process.env.REACT_APP_API_URL}/plan/${this.state._id}`,this.state,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
 
         this.setState({...emptyState})

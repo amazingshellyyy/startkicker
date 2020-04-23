@@ -18,7 +18,7 @@ class EditProject extends React.Component {
   handleSubmit = event => {
     const projectId = this.props.match.params.projectId;
     event.preventDefault();
-    axios.put(`${process.env.REACT_APP_API_URL}/project/${projectId}`, this.state.editProject,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}} )
+    axios.put(`${process.env.REACT_APP_API_URL}/project/${projectId}`, this.state.editProject,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`,'Access-Control-Allow-Origin': '*'}} )
       .then(res => {
         this.props.history.push(`/project/${res.data._id}`)
       })
@@ -37,7 +37,7 @@ class EditProject extends React.Component {
     
     const projectId = this.props.match.params.projectId;
     
-    axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`}})
+    axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`,{headers: {"authorization": `bearer ${localStorage.getItem('jwt')}`,'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         const endDate = new Date(res.data.endDate);
         if (res.data.user._id !== this.props.curUser) {

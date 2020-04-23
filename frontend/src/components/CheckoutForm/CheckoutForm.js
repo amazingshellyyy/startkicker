@@ -20,7 +20,7 @@ class CheckoutForm extends React.Component {
 
   componentDidMount() {
     const planId = this.props.match.params.planId
-    axios.get(`${process.env.REACT_APP_API_URL}/plan/${planId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/plan/${planId}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           curPlan: res.data,
@@ -33,7 +33,7 @@ class CheckoutForm extends React.Component {
   }
 
   getcurUser(curUser) {
-    axios.get(`${process.env.REACT_APP_API_URL}/user/${curUser}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/user/${curUser}`, {headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           curUser: res.data
@@ -53,7 +53,7 @@ class CheckoutForm extends React.Component {
       currency: "usd",
       metadata: { ...this.state.curPlan, userId }
     }
-    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend)
+    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend, {headers: {'Access-Control-Allow-Origin': '*'})
       .then(res => {
 
         this.handlePayment(res.data.client_secret)

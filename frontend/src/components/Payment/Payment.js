@@ -18,7 +18,7 @@ class Payment extends Component {
  
 
   componentDidMount(){
-    axios.get(`${process.env.REACT_APP_API_URL}/plan/${this.props.match.params.planId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/plan/${this.props.match.params.planId}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           curPlan: res.data

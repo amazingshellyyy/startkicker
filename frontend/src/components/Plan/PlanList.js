@@ -20,7 +20,7 @@ class PlanList extends React.Component {
 
   componentDidMount(){
     const projectId = this.props.match.params.projectId
-    axios.get(`${process.env.REACT_APP_API_URL}/plan/all/${projectId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/plan/all/${projectId}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           plans: res.data,
@@ -46,7 +46,7 @@ updateEditPlan= (id) => {
     EditId: id
   })
   
-  axios.get(`${process.env.REACT_APP_API_URL}/plan/${id}`)
+  axios.get(`${process.env.REACT_APP_API_URL}/plan/${id}`,{headers: {'Access-Control-Allow-Origin': '*'}})
     .then(res => {
       this.setState({
         editPlan: res.data

@@ -19,7 +19,7 @@ class Signup extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
 
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, this.state)
+    axios.post(`${process.env.REACT_APP_API_URL}/auth/signup`, this.state,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         let jwt = res.data.jwt
         this.props.setCurrentUser(jwt, res.data.userId);

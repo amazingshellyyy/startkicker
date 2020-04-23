@@ -16,7 +16,7 @@ class Project extends React.Component {
   componentDidMount() {
 
     const projectId = this.props.match.params.projectId;
-    axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/project/${projectId}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           curProject: res.data
@@ -34,7 +34,7 @@ class Project extends React.Component {
   handleDelete = event => {
     event.preventDefault();
     const projectId = this.props.match.params.projectId;
-    axios.delete(`${process.env.REACT_APP_API_URL}/project/${projectId}`, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
+    axios.delete(`${process.env.REACT_APP_API_URL}/project/${projectId}`, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}`,'Access-Control-Allow-Origin': '*'} })
       .then(res => {
         this.props.history.push('/');
       })

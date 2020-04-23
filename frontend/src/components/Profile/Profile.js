@@ -16,7 +16,7 @@ class Profile extends React.Component {
   
 
   componentDidMount() {
-    axios.get(`${process.env.REACT_APP_API_URL}/user/${this.props.match.params.userId}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/user/${this.props.match.params.userId}`,{headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
         this.setState({
           user: res.data

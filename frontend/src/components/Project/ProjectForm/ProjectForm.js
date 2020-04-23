@@ -25,7 +25,7 @@ class ProjectForm extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}` } })
+    axios.post(`${process.env.REACT_APP_API_URL}/project/create`, this.state, { headers: { "authorization": `bearer ${localStorage.getItem('jwt')}`,'Access-Control-Allow-Origin': '*' } })
       .then(res => {
         this.setState({
           show: true,
