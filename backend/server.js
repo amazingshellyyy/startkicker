@@ -20,7 +20,7 @@ const coresOptions = {
 }
 
 app.use(morgan('dev'));
-app.use(cors(coresOptions))
+app.use(cors())
 app.use(bodyParser.json());
 
 //-----Routes----//
