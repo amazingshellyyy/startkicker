@@ -53,7 +53,7 @@ class CheckoutForm extends React.Component {
       currency: "usd",
       metadata: { ...this.state.curPlan, userId }
     }
-    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend, {headers: {'Access-Control-Allow-Origin': '*'})
+    axios.post(`${process.env.REACT_APP_API_URL}/pay/createPaymentIntent`, objectToSend, {headers: {'Access-Control-Allow-Origin': '*'}})
       .then(res => {
 
         this.handlePayment(res.data.client_secret)

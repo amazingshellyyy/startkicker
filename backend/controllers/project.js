@@ -41,6 +41,7 @@ const update = async(req, res) => {
   }
 }
 const show = async(req, res) => {
+    
   try {
     let showProject = await db.Project.findById(req.params.id).populate('user').populate('plan');
     console.log(showProject)
@@ -70,6 +71,9 @@ const destroy = async(req, res) => {
 }
 
 const showAll = async(req, res) => {
+    console.log('hii')
+    // console.log('req in show',req);
+    // console.log(req.headers);
   try{
     const allProject = await db.Project.find({}).populate('user').populate('plan')
     res.status(200).json(allProject)
