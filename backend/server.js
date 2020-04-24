@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', routes.auth);
 app.use('/api/v1/pay', routes.pay);
-app.use('/api/v1/project', routes.project);
+app.use('/api/v1/project', cors(), routes.project);
 app.use('/api/v1/plan', routes.plan);
 app.use('/api/v1/user', routes.user);
 
