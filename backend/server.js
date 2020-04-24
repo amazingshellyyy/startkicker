@@ -13,18 +13,18 @@ const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
 
 //-----Middleware---//
-const originList = ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com']
-const coresOptions = {
-  origin: function(origin, callback) {
-      if (originList.indexOf(origin) !== -1) {
-          callback(null, true)
-      } else {
-          callback(new Error('Not allow by cors'))
-      }
-  },
-  credentials: true,
-  optionsSuccessStatus: 200
-}
+// const originList = ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com']
+// const coresOptions = {
+//   origin: function(origin, callback) {
+//       if (originList.indexOf(origin) !== -1) {
+//           callback(null, true)
+//       } else {
+//           callback(new Error('Not allow by cors'))
+//       }
+//   },
+//   credentials: true,
+//   optionsSuccessStatus: 200
+// }
 
 app.use(cors());
 app.use(morgan('dev'));
