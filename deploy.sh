@@ -4,6 +4,7 @@ git subtree push --prefix backend heroku master
 echo ">> backend deployed successfully"
 cd ./frontend
 npm run build
+sleep 5s
 git add .
 git commit -m "create docs and ready for deploy"
 git push origin master
