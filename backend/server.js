@@ -13,20 +13,20 @@ const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
 
 //-----Middleware---//
-// const originList = ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com']
-// const coresOptions = {
-//   origin: function(origin, callback) {
-//       if (originList.indexOf(origin) !== -1) {
-//           callback(null, true)
-//       } else {
-//           callback(new Error('Not allow by cors'))
-//       }
-//   },
-//   credentials: true,
-//   optionsSuccessStatus: 200
-// }
+const originList = ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com']
+const coresOptions = {
+  origin: function(origin, callback) {
+      if (originList.indexOf(origin) !== -1) {
+          callback(null, true)
+      } else {
+          callback(new Error('Not allow by cors'))
+      }
+  },
+  credentials: true,
+  optionsSuccessStatus: 200
+}
 
-app.use(cors());
+app.use(cors(coresOptions));
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 
@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 app.use('/api/v1/auth', routes.auth);
 app.use('/api/v1/pay', routes.pay);
-app.use('/api/v1/project', cors(), routes.project);
+app.use('/api/v1/project', routes.project);
 app.use('/api/v1/plan', routes.plan);
 app.use('/api/v1/user', routes.user);
 
