@@ -13,7 +13,7 @@ const stripe = require('stripe')(`${process.env.STRIPE_KEY}`);
 
 
 //-----Middleware---//
-const originList = ['http://localhost:3000', 'https://www.amazingshellyyy.com','https://amazingshellyyy.com']
+const originList = ['http://localhost:3000','https://amazingshellyyy.com']
 const coresOptions = {
   origin: function(origin, callback) {
       if (originList.indexOf(origin) !== -1) {
