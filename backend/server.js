@@ -26,8 +26,8 @@ const coresOptions = {
   optionsSuccessStatus: 200
 }
 
-app.use(morgan('dev'));
 app.use(cors());
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 //-----Routes----//
